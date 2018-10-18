@@ -1,0 +1,17 @@
+<div class="container">
+
+  <h2>{{pageHeader}}</h2>
+
+  <form [formGroup]="noteForm" (ngSubmit)="onNoteFormSubmit()">
+      <div class="form-group">
+        <label for="note_title">Note Title</label>
+        <input type="text" class="form-control" id="note_title" formControlName="note_title" aria-describedby="note_title_help" placeholder="Your Note Title">
+        <small id="note_title_help" class="form-text text-muted">Give a small heading to your note</small>
+      </div>
+      <div class="form-group">
+        <label for="note_content">Note Content</label>
+        <textarea class="form-control" id="note_content" formControlName="note_content"  rows="10" placeholder="Your Note Content"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">{{saveUpdateLabel}}</button>
+    </form>
+</div>

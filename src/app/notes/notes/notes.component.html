@@ -1,0 +1,20 @@
+
+<div class="container">
+
+  <a [routerLink]="['/create-note']" routerLinkActive="active" > Create New Note</a>
+  <!--
+    in case of new note open above without passing any data.
+
+    In case of editing the existing note pass note details to this route.
+
+     data property of the route
+     The data property in the third route is a place to store arbitrary data associated with this specific route. 
+     The data property is accessible within each activated route.
+    Use it to store items such as page titles, breadcrumb text, and other read-only, static data.
+  -->
+
+  <h3>Notes Section</h3>
+  <app-notes-collection></app-notes-collection>
+
+
+</div>

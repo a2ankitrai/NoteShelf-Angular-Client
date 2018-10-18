@@ -1,0 +1,37 @@
+
+<div class="container">
+	<!--  justify-content-center -->
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>Login / Registration</h2>
+			<form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+				<div class="form-group">
+					<label for="userNameInput">User Name</label>
+					<input type="text" class="form-control" id="userName" formControlName="userName" placeholder="Enter username" />
+
+					<small *ngIf="!loginForm.get('userName').valid && loginForm.get('userName').touched" class="text-muted">
+						UserName is required </small>
+
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" />
+
+					<small *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="text-muted">
+						Password is required </small>
+				</div>
+
+				<span *ngIf="formInvalid" class="text-muted">Please enter a valid data!</span>
+				<br />
+				<button type="submit" class="btn btn-primary">Login</button>
+			</form>
+			<br /><br />
+			<button class="btn btn-success" type="button" (click)="accessNonSecuredEndpoint()">Access non-secured End point</button>
+			<br /><br />
+			<button class="btn btn-success" type="button" (click)="authenticatingRequest()">Authenticate User</button>
+			<br /><br />
+			<button class="btn btn-success" type="button" (click)="logout()">Logout</button>
+
+		</div>
+	</div>
+</div>
