@@ -9,20 +9,24 @@ export class UserRegistration {
     public confirm_password: string;
     public auth_type: string;
 
-    constructor(user_name: string,
-        first_name: string,
-        last_name: string,
-        email_address: string,
-        password: string,
-        confirm_password: string) {
-
-        this.user_name = user_name;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email_address = email_address;
-        this.password = password;
-        this.confirm_password = confirm_password;
+    public constructor(init?: Partial<UserRegistration>) {
+        Object.assign(this, init);
     }
+
+    // constructor(user_name: string,
+    //     first_name: string,
+    //     last_name: string,
+    //     email_address: string,
+    //     password: string,
+    //     confirm_password: string) {
+
+    //     this.user_name = user_name;
+    //     this.first_name = first_name;
+    //     this.last_name = last_name;
+    //     this.email_address = email_address;
+    //     this.password = password;
+    //     this.confirm_password = confirm_password;
+    // }
 
     get userName() {
         return this.user_name;

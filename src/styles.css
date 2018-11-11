@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('app/common/stylesheets/font-awesome.min.css');
+
+@import url('app/common/stylesheets/docs.css');  
+@import url('app/common/stylesheets/bootstrap-social.css');

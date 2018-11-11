@@ -15,4 +15,9 @@ export class NsCommonService {
 
 
   constructor() { }
+
+  getSessionToken() {
+    return this.sessionToken;
+  }
+
 }

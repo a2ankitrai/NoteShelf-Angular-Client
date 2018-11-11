@@ -18,7 +18,7 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit() {
 
-    this.username = '<b>Ankit</b>';
+    this.username = 'Ankit';
     this.responseMessage = this.commonService.loginResponse;
 
     // this.responseMessage = this.route.queryParamMap.pipe(map(params => {

@@ -21,14 +21,16 @@
         <img src="src/app/profile/profile/images/pp1.jpg" id="profile_picture" class="rounded-circle" alt="image not found">
       </div> -->
 
-        <div class="col-md-4">
+        <div class="col-sm-2 col-md-4">
           <div class="text-center">
-            <img src="//placehold.it/100" class="avatar rounded-circle" alt="avatar">
+            <img src="//placehold.it/120" class="avatar rounded-circle" alt="avatar">
           </div>
         </div>
         <div class="col-md-4">
           <!-- <p>Upload a different photo...</p> -->
-          <input type="file" class="form-control">
+          <div class="custom-file">
+            <input type="file" class="form-control" id="profile_picture" formControlName="profile_picture">
+          </div>
         </div>
       </div>
     </form>

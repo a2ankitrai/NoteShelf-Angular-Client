@@ -14,6 +14,7 @@ export class NotesCollectionComponent implements OnInit {
   noteCollection: Array<Note>;
 
   ngOnInit() {
+    // move the logic of fillNotesArray from the service and create a resolver for the same.
     this.noteCollection = this.notesService.notesArray;
   }
 
