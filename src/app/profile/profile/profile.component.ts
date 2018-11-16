@@ -1,8 +1,10 @@
+import { Profile } from './../model/profile.model';
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ProfileInput } from '../model/profileInput.model';
 import { ProfileService } from '../service/profile.service';
+import { ActivatedRoute } from '@angular/router';
+import { NsCommonService } from 'src/app/common/service/ns-common.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +13,7 @@ import { ProfileService } from '../service/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
+  profile: Profile;
   profileForm: FormGroup;
   pictureForm: FormGroup;
   profilePictureSource: string;
@@ -22,7 +25,13 @@ export class ProfileComponent implements OnInit {
     'alert-danger': false
   };
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) { }
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private commonService: NsCommonService,
+    private route: ActivatedRoute) {
+    this.route.data.subscribe(response => {
+      this.profile = response.profile.body as Profile;
+    });
+
+  }
 
   ngOnInit() {
 
@@ -30,16 +39,17 @@ export class ProfileComponent implements OnInit {
       profile_picture: []
     });
 
+    // implement proper validation here as well as server side for all the fields.
     this.profileForm = this.formBuilder.group({
-      user_name: ['jack23', Validators.required],
-      first_name: ['Jackson'],
-      last_name: ['Robin'],
-      gender: ['Male'],
-      work: ['Goldman Sachs'],
-      contact_number: ['934723493429'],
-      birth_date: ['18-Sep'],
-      birth_year: ['1985'],
-      language: ['Spanish'],
+      user_name: [this.commonService.user.userName, Validators.required],
+      first_name: [this.profile.first_name],
+      last_name: [this.profile.last_name],
+      gender: [this.profile.gender],
+      work: [this.profile.work],
+      contact_number: [this.profile.contact_number],
+      birth_date: [this.profile.birth_date],
+      birth_year: [this.profile.birth_year],
+      language: [this.profile.language],
     });
   }
 
@@ -56,39 +66,28 @@ export class ProfileComponent implements OnInit {
 
 
   onProfileFormSubmit() {
+    this.profile = this.profileForm.value;
 
-    const profileInput = new ProfileInput();
+    console.log('profile before submission: ');
+    console.log(this.profile);
 
-    profileInput.first_name = this.first_name;
-    profileInput.last_name = this.last_name;
-    profileInput.gender = this.gender;
-    profileInput.work = this.work;
-    profileInput.contact_number = this.contact_number;
-    profileInput.birth_date = this.birth_date;
-    profileInput.birth_year = this.birth_year;
-    profileInput.language = this.language;
+    this.profileService.saveUserProfile(this.profile).subscribe(response => {
+      console.log(response);
+      this.responseMessage = 'Profile updated successfully.';
+      // this.profileForm.reset();
 
-    this.profileService.saveProfile(profileInput).subscribe(
-      response => {
-        console.log(response);
-        this.responseMessage = 'Profile updated successfully.';
-        this.profileForm.reset();
-
-        this.resetResponseAlert();
-        this.setResponseAlert('success');
-      },
+      this.resetResponseAlert();
+      this.setResponseAlert('success');
+    },
       err => {
+        // handle validation error and other error properly here.
+        // apply this generically
         console.error(err);
         this.responseMessage = 'Some Error occured in saving profile.';
         this.resetResponseAlert();
         this.setResponseAlert('failure');
 
-      }
-    );
-
-
-    // submit the profile to the ns backend service.
-    // clear the form
+      });
 
   }
 

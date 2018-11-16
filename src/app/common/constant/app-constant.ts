@@ -3,10 +3,6 @@ import { environment } from 'src/environments/environment';
 
 export const NS_ENDPOINT = environment.APIEndpoint;
 
-
-
-
-
 /**
  * Request Constants
 */

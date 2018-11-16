@@ -1,7 +1,6 @@
-import { Observable } from 'rxjs';
+import { Profile } from './../model/profile.model';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { ProfileInput } from '../model/profileInput.model';
+import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { NsCommonService } from 'src/app/common/service/ns-common.service';
 import * as AppConstant from 'src/app/common/constant/app-constant';
 
@@ -11,37 +10,30 @@ import * as AppConstant from 'src/app/common/constant/app-constant';
 })
 export class ProfileService {
 
-  constructor(private http: HttpClient, private commonService: NsCommonService) { }
+  constructor(private http: HttpClient, private commonService: NsCommonService) {
 
-  saveProfile(profileInput: ProfileInput) {
+  }
 
-    console.log('saving profile information');
-    console.log(profileInput);
+  getUserProfile() {
+    const headers = this.commonService.setCommonHeaders();
+    // return this.http.get<Profile>(AppConstant.NS_ENDPOINT + 'profile', { headers: headers });
+    return this.http.get(AppConstant.NS_ENDPOINT + 'profile', { headers: headers, 'observe': 'response' });
+  }
 
-    /***
-     * Build this common functionality
-     */
-    // let headers = new HttpHeaders();
-    // headers = headers.set('X-Auth-Token', this.commonService.user.sessionToken);
+  getUserProfilePictureByUserId(userId: string) {
+    const headers = this.commonService.setCommonHeaders();
+    return this.http.get(AppConstant.NS_ENDPOINT + 'profile/picture', { headers: headers, 'observe': 'response' });
+  }
 
-    // return this.http.put(AppConstant.NS_ENDPOINT + '/profile', profileInput, { headers: headers });
-
-
-    // replace the below with actual call to ns -app
-    return Observable.create(function (observer) {
-       observer.next('Information saved successfully');
-      // observer.error('throwing errrs');
-      observer.complete();
-    });
-
-    // mocking the service to develop fast. Learn how to create observables.
+  saveUserProfile(profile: Profile) {
+    const headers = this.commonService.setCommonHeaders();
+    return this.http.put(AppConstant.NS_ENDPOINT + 'profile', profile, { headers: headers, 'observe': 'response' });
   }
 
   accessAuthencatedEndpointWithToken(token: string) {
     let headers = new HttpHeaders();
     headers = headers.set('X-Auth-Token', token);
 
-    return this.http.post('http://localhost:9000/user/logout', null, { headers: headers })
-      ;
+    return this.http.post('http://localhost:9000/user/logout', null, { headers: headers });
   }
 }

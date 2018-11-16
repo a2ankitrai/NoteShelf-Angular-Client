@@ -15,6 +15,7 @@ export class NotesService {
   }
 
   notesArray: Array<Note> = [];
+  // put url paths in a common files and use only constants here.
 
   fetchAllNotes() {
     const headers = this.setCommonHeaders();
@@ -38,7 +39,20 @@ export class NotesService {
     console.log('inside update');
     const headers = this.setCommonHeaders();
     return this.http.put(AppConstant.NS_ENDPOINT + 'note/' + newNote.note_id, newNote, { headers: headers, 'observe': 'response' });
+  }
 
+  deleteNote(noteId: string) {
+    console.log('inside delete note');
+    const headers = this.setCommonHeaders();
+    return this.http.delete(AppConstant.NS_ENDPOINT + 'note/' + noteId, { headers: headers, 'observe': 'response' });
+  }
+
+  deleteNoteFromLocalNotesArray(noteId: string) {
+    this.notesArray.forEach((note, index, array) => {
+      if (note.note_id === noteId) {
+        array.splice(index, 1);
+      }
+    });
   }
 
   fillNotesArray() {

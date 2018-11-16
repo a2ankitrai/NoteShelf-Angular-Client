@@ -20,6 +20,10 @@ export class UserService {
 
     // return this.http.post('http://localhost:9000/user/login', null, { headers: headers, 'observe': 'response' });
 
+    /**
+     *  {observe: 'response'}
+     *  to display the full response including headers
+     */
     return this.http.post(AppConstant.NS_ENDPOINT + 'user/login', null, { headers: headers, 'observe': 'response' });
 
   }

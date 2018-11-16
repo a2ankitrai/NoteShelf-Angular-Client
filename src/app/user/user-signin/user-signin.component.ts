@@ -1,3 +1,4 @@
+import { LoggedInUser } from './../../common/model/logged-in-user.model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../service/user.service';
@@ -52,11 +53,23 @@ export class UserSigninComponent implements OnInit {
       (response: any) => {
         //  console.log(response);
         this.commonService.sessionToken = response.headers.get(AppConstant.X_AUTH_TOKEN);
-
+        const loginResponse = response.body;
         console.log(response.body);
-        this.commonService.loginResponse = response.body.message;
+        // this.commonService.loginResponse = response.body.message;
 
-        // redirect programmatcaclly to home page (notes)
+        // convert below into a function in logged in user setting partial information
+        // use type casting in typescript `as`
+        this.commonService.user = loginResponse as LoggedInUser;
+
+        // this.commonService.user = new LoggedInUser();
+        // this.commonService.user.userId = loginResponse.userId;
+        // this.commonService.user.userName = loginResponse.userName;
+        // this.commonService.user.email = loginResponse.email;
+        // this.commonService.user.authType = loginResponse.authType;
+        // this.commonService.user.role = loginResponse.role;
+        // this.commonService.user.createdDate = loginResponse.createdDate;
+        // this.commonService.user.updatedDate = loginResponse.updatedDate;
+
         this.router.navigate(['../home'], { relativeTo: this.route });
 
       },

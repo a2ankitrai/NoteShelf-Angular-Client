@@ -8,23 +8,26 @@
 -->
 <!-- <a  [routerLink]="[index]" routerLinkActive="active"> 
   [routerLink]="['/edit-note']" -->
-<a [routerLink]="['/edit-note', note.note_id]" routerLinkActive="router-link-active" routerLinkActive="active">
+
+<!-- <a [routerLink]="['/edit-note', note.note_id]" routerLinkActive="router-link-active" routerLinkActive="active"> -->
   <div class="card">
+    <div class="card-header text-right">
+      <button class="btn btn-primary" (click)="editNote()">Edit</button>
+      &nbsp;
+      <button class="btn btn-danger" (click)="deleteNote()">Delete</button>
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{note.note_title}}</h5>
       <p class="card-text">{{note.note_content}}</p>
       <div class="card-footer bg-transparent">
         <small class="text-muted">Last updated: {{note.updated_date | date : 'medium'}}</small>
 
-
         <!-- check on how above can be changed to relative time like below-->
         <!-- <small class="text-muted">Last updated 20 mins ago</small> 
         
         https://stackoverflow.com/questions/36663148/angular-2-time-ago-pipe
-          https://gist.github.com/JonCatmull/e00afb1c96298a4e386ea1b5d091702a
-
-      -->
+          https://gist.github.com/JonCatmull/e00afb1c96298a4e386ea1b5d091702a -->
       </div>
     </div>
   </div>
-</a>
+<!-- </a> -->

@@ -89,6 +89,8 @@ export class UserRegistrationComponent implements OnInit {
 
         this.userRegistrationForm.reset();
 
+        // verification mail notification and associated flow
+
       },
       err => {
         const errors = err.error;
