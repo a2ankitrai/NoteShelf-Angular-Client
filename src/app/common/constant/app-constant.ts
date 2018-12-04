@@ -8,6 +8,11 @@ export const NS_ENDPOINT = environment.APIEndpoint;
 */
 
 export const X_AUTH_TOKEN = 'X-Auth-Token';
+export const AUTHORIZATION = 'Authorization';
+export const BEARER_ = 'Bearer ';
+
+export const SESSION_TOKEN = 'SESSION_TOKEN';
+export const LOGGED_IN_USER = 'LOGGED_IN_USER';
 
 
 

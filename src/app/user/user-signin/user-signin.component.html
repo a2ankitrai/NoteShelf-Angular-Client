@@ -32,13 +32,19 @@
     <div class="col-sm-4 col-md-4 col-lg-4">
       <h2>Or Sign In with</h2>
       <div>
-        <a class="btn btn-block btn-social btn-github"  style="color: white">
-          <span class="fa fa-github"></span>GitHub
-        </a>
+        <a class="btn btn-block btn-social btn-google" (click)="googleSignIn()" style="color: white">
+          <span class="fa fa-google"></span>Google
+        </a> 
       </div>
       <hr>
       <div>
-        <a class="btn btn-block btn-social btn-twitter"  style="color: white">
+        <a class="btn btn-block btn-social btn-github" (click)="githubSignIn()" style="color: white">
+          <span class="fa fa-github"></span>GitHub
+        </a> 
+      </div>
+      <hr>
+      <div>
+        <a class="btn btn-block btn-social btn-twitter" style="color: white">
           <span class="fa fa-twitter"></span>Twitter
         </a>
       </div>

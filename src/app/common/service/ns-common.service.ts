@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoggedInUser } from '../model/logged-in-user.model';
 import { HttpHeaders } from '@angular/common/http';
 import * as AppConstant from 'src/app/common/constant/app-constant';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -9,15 +10,18 @@ import * as AppConstant from 'src/app/common/constant/app-constant';
 })
 export class NsCommonService {
 
-  // create a common class containing logged in user data add it here rather than adding fields individually.
-
-  sessionToken: string;
-  loginResponse: string;
-
+  public sessionToken: string;
+  public jwtToken: string;
+  public loginResponse: string;
   public user: LoggedInUser;
 
+  userLoggedInObservable: Observable<boolean>;
+  userLoggedInSubject: Subject<boolean>;
 
-  constructor() { }
+  constructor() {
+    this.userLoggedInSubject = new Subject<boolean>();
+    this.userLoggedInObservable = this.userLoggedInSubject.asObservable();
+  }
 
   getSessionToken() {
     return this.sessionToken;
@@ -28,6 +32,14 @@ export class NsCommonService {
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set(AppConstant.X_AUTH_TOKEN, this.getSessionToken());
     return headers;
+  }
+
+  setUser(user: LoggedInUser) {
+    this.user = user;
+  }
+
+  getUser() {
+    return this.user;
   }
 
 }

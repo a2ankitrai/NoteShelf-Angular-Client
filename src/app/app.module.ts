@@ -1,3 +1,4 @@
+import { NsCommonService } from 'src/app/common/service/ns-common.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,6 +13,8 @@ import { PageNotFoundComponent } from './common/component/page-not-found/page-no
 import { ProfileModule } from './profile/profile.module';
 import { PlaygroundComponent } from './common/component/playground/playground.component';
 import { NotesModule } from './notes/notes.module';
+import { CoreModule } from './core/core.module';
+import { SocialLoginComponent } from './common/component/social-login/social-login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { NotesModule } from './notes/notes.module';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    PlaygroundComponent
+    PlaygroundComponent,
+    SocialLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +32,10 @@ import { NotesModule } from './notes/notes.module';
     HttpClientModule,
     NotesModule,
     UserModule,
-    ProfileModule
+    ProfileModule,
+    CoreModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: []
 })
 export class AppModule { }

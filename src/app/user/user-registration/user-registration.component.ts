@@ -1,4 +1,3 @@
-import { error } from 'protractor';
 import { UserService } from '../service/user.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';

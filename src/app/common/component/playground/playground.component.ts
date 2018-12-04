@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from '../../service/local-storage.service';
+import * as AppConstant from 'src/app/common/constant/app-constant';
 
 @Component({
   selector: 'app-playground',
@@ -8,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class PlaygroundComponent implements OnInit {
 
   message: string;
-  constructor() { }
+
+  constructor(private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.message = 'Rx in Action';
+  }
+
+  clearStorage() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.localStorageService.removeItem(AppConstant.SESSION_TOKEN);
+    this.localStorageService.clear();
   }
 
 }

@@ -9,13 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotesCollectionComponent implements OnInit {
 
-  constructor(private notesService: NotesService) { }
+  constructor(private notesService: NotesService) {
+
+    console.log('notesCollection constructor');
+    // fix below multiple assignment..
+    this.noteCollection = this.notesService.notesArray;
+    notesService.notesArrayObservable.subscribe(noteArray => {
+      this.noteCollection = noteArray;
+    });
+  }
 
   noteCollection: Array<Note>;
 
   ngOnInit() {
+
+    console.log('notesCollection ngOnInit');
     // move the logic of fillNotesArray from the service and create a resolver for the same.
-    this.noteCollection = this.notesService.notesArray;
+    // check on how this noteCollection can always be in sync with notesService.noteArray
+    // this.noteCollection = this.notesService.fillNotesArray();
+    // console.log(this.noteCollection);
+
   }
 
 }

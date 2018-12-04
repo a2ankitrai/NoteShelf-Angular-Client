@@ -67,6 +67,8 @@ export class NotesEditComponent implements OnInit {
         });
         console.log('inside update: end');
 
+        this.notesService.notesArraySubject.next(this.notesService.notesArray);
+
         this.noteForm.reset();
       }, err => {
         const errors = err.error;
@@ -82,6 +84,7 @@ export class NotesEditComponent implements OnInit {
         const noteResponse = response.body as Note;
         console.log(noteResponse);
         this.notesService.notesArray.push(noteResponse);
+        this.notesService.notesArraySubject.next(this.notesService.notesArray);
         this.noteForm.reset();
       }, err => {
         const errors = err.error;

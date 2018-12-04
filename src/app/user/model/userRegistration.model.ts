@@ -9,6 +9,7 @@ export class UserRegistration {
     public confirm_password: string;
     public auth_type: string;
 
+    // implement below in other places as well. Gather more information on Partial
     public constructor(init?: Partial<UserRegistration>) {
         Object.assign(this, init);
     }
