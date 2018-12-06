@@ -20,8 +20,6 @@ export class UserService {
     headers = headers.set('Authorization', 'Basic ' + btoa(userLogin.name + ':' + userLogin.password));
     headers = headers.set('Content-Type', 'application/json');
 
-    // return this.http.post('http://localhost:9000/user/login', null, { headers: headers, 'observe': 'response' });
-
     /**
      *  {observe: 'response'}
      *  to display the full response including headers

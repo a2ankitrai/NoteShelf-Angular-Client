@@ -15,6 +15,7 @@ export class NsCommonService {
   public loginResponse: string;
   public user: LoggedInUser;
 
+  // add rxjs documentation here.
   userLoggedInObservable: Observable<boolean>;
   userLoggedInSubject: Subject<boolean>;
 
@@ -25,6 +26,15 @@ export class NsCommonService {
 
   getSessionToken() {
     return this.sessionToken;
+  }
+
+  setSessionToken(token) {
+    this.sessionToken = token;
+  }
+
+
+  setJwtToken(token) {
+    this.jwtToken = token;
   }
 
   setCommonHeaders() {

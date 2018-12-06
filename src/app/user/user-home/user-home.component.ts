@@ -20,33 +20,6 @@ export class UserHomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private commonService: NsCommonService, private userService: UserService) { }
 
   ngOnInit() {
-
-    // this.jwtToken = this.getParamValueQueryString('token');
-
-    // console.log('jwtToken: ' + this.jwtToken);
-
-    // if (this.jwtToken !== undefined) {
-
-    //   this.commonService.jwtToken = this.jwtToken;
-    //   this.userService.getLoggedInUserfromBearerToken(this.jwtToken).subscribe(response => {
-    //     console.log(response);
-
-    //     const loginResponse = response.body;
-
-    //     console.log(loginResponse);
-    //     this.commonService.setUser(loginResponse as LoggedInUser);
-
-    //     console.log('common service user');
-    //     console.log(this.commonService.getUser());
-    //     this.commonService.userLoggedInSubject.next(true);
-
-    //   },
-    //     err => {
-    //       console.error(err);
-    //     });
-    // }
-
-    // this.user = this.commonService.getUser();
   }
 
   getParamValueQueryString(paramName) {

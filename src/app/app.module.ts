@@ -15,6 +15,7 @@ import { PlaygroundComponent } from './common/component/playground/playground.co
 import { NotesModule } from './notes/notes.module';
 import { CoreModule } from './core/core.module';
 import { SocialLoginComponent } from './common/component/social-login/social-login.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,6 @@ import { SocialLoginComponent } from './common/component/social-login/social-log
     CoreModule
   ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [ CookieService ]
 })
 export class AppModule { }

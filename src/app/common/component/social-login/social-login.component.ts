@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NsCommonService } from '../../service/ns-common.service';
 import { LoggedInUser } from '../../model/logged-in-user.model';
 import { HttpParams } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import * as AppConstant from 'src/app/common/constant/app-constant';
 
 @Component({
   selector: 'app-social-login',
@@ -16,7 +18,8 @@ export class SocialLoginComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private commonService: NsCommonService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
     this.jwtToken = this.getParamValueQueryString('token');
@@ -26,13 +29,13 @@ export class SocialLoginComponent implements OnInit {
     if (this.jwtToken !== undefined) {
 
       this.commonService.jwtToken = this.jwtToken;
+
       this.userService.getLoggedInUserfromBearerToken(this.jwtToken).subscribe(response => {
         console.log(response);
-
         const loginResponse = response.body;
 
-        console.log(loginResponse);
         this.commonService.setUser(loginResponse as LoggedInUser);
+        this.cookieService.set(AppConstant.JWT_SOCIAL_LOGIN_TOKEN, this.jwtToken);
 
         console.log('common service user');
         console.log(this.commonService.getUser());

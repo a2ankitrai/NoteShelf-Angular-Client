@@ -105,13 +105,24 @@ export class NotesService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
 
-    console.log('session token of commonservice: ' + this.commonService.getSessionToken());
     if (this.commonService.getSessionToken() !== null && this.commonService.getSessionToken() !== undefined) {
       headers = headers.set(AppConstant.X_AUTH_TOKEN, this.commonService.getSessionToken());
     }
+
     if (this.commonService.jwtToken !== null && this.commonService.jwtToken !== undefined) {
       headers = headers.set(AppConstant.AUTHORIZATION, AppConstant.BEARER_ + this.commonService.jwtToken);
     }
+
+    /**
+     *
+     *     if (this.loggedInUser.authType === 'APP') {
+      this.commonService.sessionToken = undefined;
+      this.localStorageService.removeItem(AppConstant.SESSION_TOKEN);
+    } else {
+      this.commonService.setJwtToken(undefined);
+      this.cookieService.delete(AppConstant.JWT_SOCIAL_LOGIN_TOKEN);
+    }
+    */
 
     return headers;
   }
