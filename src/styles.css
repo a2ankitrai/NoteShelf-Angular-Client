@@ -4,3 +4,7 @@
 
 @import url('app/common/stylesheets/docs.css');  
 @import url('app/common/stylesheets/bootstrap-social.css');
+
+.center {
+    text-align: center
+}

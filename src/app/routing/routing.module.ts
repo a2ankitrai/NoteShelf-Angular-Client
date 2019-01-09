@@ -1,3 +1,4 @@
+import { AboutComponent } from './../common/component/about/about.component';
 import { SocialLoginComponent } from './../common/component/social-login/social-login.component';
 import { NotesRoutingModule } from './../notes/notes-routing.module';
 import { NgModule } from '@angular/core';
@@ -12,8 +13,9 @@ const appRoutes: Routes = [
 
   // { path: 'notes', component: NotesComponent },
   { path: '', redirectTo: '/user', pathMatch: 'full', },
-  { path: 'social-login', component: SocialLoginComponent},
-  { path: 'playground', component: PlaygroundComponent},
+  { path: 'social-login', component: SocialLoginComponent },
+  { path: 'playground', component: PlaygroundComponent },
+  { path: 'about', component: AboutComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,4 +1,3 @@
-import { NsCommonService } from 'src/app/common/service/ns-common.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -16,6 +15,9 @@ import { NotesModule } from './notes/notes.module';
 import { CoreModule } from './core/core.module';
 import { SocialLoginComponent } from './common/component/social-login/social-login.component';
 import { CookieService } from 'ngx-cookie-service';
+import { PolicyComponent } from './common/component/policy/policy.component';
+import { AboutComponent } from './common/component/about/about.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,13 @@ import { CookieService } from 'ngx-cookie-service';
     FooterComponent,
     PageNotFoundComponent,
     PlaygroundComponent,
-    SocialLoginComponent
+    SocialLoginComponent,
+    PolicyComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RoutingModule,
     FormsModule,
     HttpClientModule,
@@ -37,6 +42,6 @@ import { CookieService } from 'ngx-cookie-service';
     CoreModule
   ],
   bootstrap: [AppComponent],
-  providers: [ CookieService ]
+  providers: [CookieService]
 })
 export class AppModule { }

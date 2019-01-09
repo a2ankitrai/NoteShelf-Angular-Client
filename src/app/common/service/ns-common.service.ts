@@ -3,6 +3,7 @@ import { LoggedInUser } from '../model/logged-in-user.model';
 import { HttpHeaders } from '@angular/common/http';
 import * as AppConstant from 'src/app/common/constant/app-constant';
 import { Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -28,13 +29,16 @@ export class NsCommonService {
     return this.sessionToken;
   }
 
-  setSessionToken(token) {
+  setSessionToken(token: string) {
     this.sessionToken = token;
   }
 
-
-  setJwtToken(token) {
+  setJwtToken(token: string) {
     this.jwtToken = token;
+  }
+
+  getJwtToken() {
+    return this.jwtToken;
   }
 
   setCommonHeaders() {
@@ -50,6 +54,14 @@ export class NsCommonService {
 
   getUser() {
     return this.user;
+  }
+
+  routeToSignInPage(router: Router) {
+    router.navigate(['/user/sign-in']);
+  }
+
+  routeToHomePage(router: Router) {
+    router.navigate(['/user/home']);
   }
 
 }
