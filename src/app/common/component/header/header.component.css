@@ -1,0 +1,30 @@
+.login{
+    color:#d9d9d9;
+    margin-right:10px;
+    text-decoration:none;
+  }
+
+.login:hover{
+    color:#fff;
+  }
+
+
+.action-button , .action-button:active{
+    border:1px solid rgba(255,255,255,0.7);
+    border-radius:20px;
+    color:#ebeff1;
+    box-shadow:none;
+    text-shadow:none;
+    padding:6px 15px;
+    background:transparent;
+    transition:background-color 0.25s;
+    outline:none;
+  }
+
+.action-button:hover{
+    color:#fff;
+  }
+  
+.action-button.btn-lg{
+    padding:7px 18px;
+  }

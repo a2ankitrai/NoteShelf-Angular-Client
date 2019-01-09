@@ -1,3 +1,4 @@
+import { NotesService } from './../../../notes/service/notes.service';
 import { LoggedInUser } from 'src/app/common/model/logged-in-user.model';
 import * as AppConstant from 'src/app/common/constant/app-constant';
 import { LocalStorageService } from './../../service/local-storage.service';
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit {
     private commonService: NsCommonService,
     private userService: UserService,
     private localStorageService: LocalStorageService,
-    private cookieService: CookieService) {
+    private cookieService: CookieService,
+    private notesService: NotesService) {
 
     commonService.userLoggedInObservable.subscribe((val: boolean) => {
       this.userLoggedIn = val;
@@ -36,6 +38,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  redirectHomeSignIn() {
+    if (this.userLoggedIn) {
+      this.commonService.routeToHomePage(this.router);
+    } else {
+      this.commonService.routeToSignInPage(this.router);
+    }
+  }
+
   logoutUser() {
 
     console.log('logging out user...');
@@ -44,40 +54,35 @@ export class HeaderComponent implements OnInit {
       this.userService.logoutUser().subscribe(res => {
         console.log(res);
         this.clearLoggedInUserDetails();
-        this.router.navigate(['../user'], { relativeTo: this.route });
+        this.commonService.routeToSignInPage(this.router);
       }, err => {
         console.error(err);
         console.log('error occured in logout user');
+        this.clearLoggedInUserDetails();
+        this.commonService.routeToSignInPage(this.router);
       });
     } else {
       this.clearLoggedInUserDetails();
-      this.router.navigate(['../user'], { relativeTo: this.route });
+      this.commonService.routeToSignInPage(this.router);
     }
-
-    // if (this.commonService.getSessionToken() !== undefined && this.commonService.getSessionToken() !== null) {
-    //   this.userService.logoutUser().subscribe(res => {
-    //     console.log(res);
-    //     this.clearLoggedInUserDetails();
-    //     this.router.navigate(['../user'], { relativeTo: this.route });
-    //   }, err => {
-    //     console.error(err);
-    //     console.log('error occured in logout user');
-    //   });
-    // } else if (this.commonService.jwtToken !== undefined && this.commonService.jwtToken !== null) {
-    //   this.clearLoggedInUserDetails();
-    //   this.router.navigate(['../user'], { relativeTo: this.route });
-    // }
   }
 
   clearLoggedInUserDetails() {
 
     if (this.loggedInUser.authType === AppConstant.AUTH_TYPE_APP) {
-      this.commonService.sessionToken = undefined;
+
+      console.log('auth type is app ');
+
+      this.userService.logoutUser();
+      this.commonService.setSessionToken(null);
       this.localStorageService.removeItem(AppConstant.SESSION_TOKEN);
     } else {
-      this.commonService.setJwtToken(undefined);
+      this.commonService.setJwtToken(null);
       this.cookieService.delete(AppConstant.JWT_SOCIAL_LOGIN_TOKEN);
     }
+
+    this.notesService.clearNotesService();
+
     this.commonService.setUser(undefined);
     this.commonService.userLoggedInSubject.next(false);
     this.commonService.loginResponse = undefined;
