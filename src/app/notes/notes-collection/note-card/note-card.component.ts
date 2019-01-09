@@ -13,7 +13,6 @@ export class NoteCardComponent implements OnInit {
   constructor(private notesService: NotesService, private router: Router,
     private route: ActivatedRoute) { }
 
-  // note: Note;
   @Input() note: Note;
   index: string;
 
@@ -38,7 +37,7 @@ export class NoteCardComponent implements OnInit {
           } else {
             console.log('note could not be found');
           }
-          this.notesService.deleteNoteFromLocalNotesArray(this.index);
+          this.notesService.removeNoteFromLocalMap(this.index);
         }, err => {
           console.error('Error occured in deleting the note: ');
           console.log(err.error);

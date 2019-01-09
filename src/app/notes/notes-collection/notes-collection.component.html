@@ -1,7 +1,11 @@
 <hr>
 
-<div class="card-columns">
-  <div *ngFor="let note of noteCollection">
+<div class="card-columns" [@filterAnimation]="notesTotal" class="notes">
+  <!-- <div *ngFor="let note of noteCollection">
     <app-note-card [note]="note"></app-note-card>
+  </div> -->
+
+  <div *ngFor="let note of notesMap | keyvalue">
+    <app-note-card [note]="note.value"></app-note-card>
   </div>
 </div>

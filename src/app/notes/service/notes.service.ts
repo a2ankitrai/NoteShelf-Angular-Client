@@ -13,21 +13,17 @@ import { Observable, Subject } from 'rxjs';
 )
 export class NotesService {
 
-  notesArray: Array<Note> = [];
-
-  notesArrayObservable: Observable<Array<Note>>;
-  notesArraySubject: Subject<Array<Note>>;
+  notesMap: Map<string, Note>;
+  notesMapSubject: Subject<Map<string, Note>>;
+  notesMapObservable: Observable<Map<string, Note>>;
 
   constructor(private http: HttpClient, private commonService: NsCommonService) {
     console.log('Notes Service constructor called');
-    this.notesArraySubject = new Subject<Array<Note>>();
-    this.notesArrayObservable = this.notesArraySubject.asObservable();
-    this.fillNotesArray();
-    // this.commonService.userLoggedInObservable.subscribe((val: boolean) => {
-    //   if (val === false) {
-    //     this.notesArray = [];
-    //   }
-    // });
+
+    this.notesMap = new Map<string, Note>();
+    this.notesMapSubject = new Subject<Map<string, Note>>();
+    this.notesMapObservable = this.notesMapSubject.asObservable();
+
   }
 
   // put url paths in a common files and use only constants here.
@@ -37,10 +33,8 @@ export class NotesService {
     return this.http.get(AppConstant.NS_ENDPOINT + 'note/all', { headers: headers, 'observe': 'response' });
   }
 
-  fetchNoteById(id) {
-    return this.notesArray.filter(function (note) {
-      return note.note_id === id;
-    });
+  fetchNoteById(noteId: string) {
+    return this.notesMap.get(noteId);
   }
 
   saveNote(note: Note) {
@@ -62,43 +56,48 @@ export class NotesService {
     return this.http.delete(AppConstant.NS_ENDPOINT + 'note/' + noteId, { headers: headers, 'observe': 'response' });
   }
 
-  deleteNoteFromLocalNotesArray(noteId: string) {
-    this.notesArray.forEach((note, index, array) => {
-      if (note.note_id === noteId) {
-        array.splice(index, 1);
-      }
-    });
-    this.notesArraySubject.next(this.notesArray);
+  removeNoteFromLocalMap(noteId: string) {
+    this.notesMap.delete(noteId);
   }
 
-  fillNotesArray() {
-    this.fetchAllNotes().subscribe(
-      response => {
-        console.log(response);
-        const notesResponse = response.body;
+  populateNotesMap() {
+    if (this.notesMap.size !== 0) {
+      this.notesMapSubject.next(this.notesMap);
+    } else {
 
-        for (const key in notesResponse) {
-          if (notesResponse.hasOwnProperty(key)) {
-            this.notesArray.push(notesResponse[key]);
+      this.fetchAllNotes().subscribe(
+        response => {
+          console.log('fill notes array: success');
+          console.log(response);
+          const notesResponse = response.body;
+
+          for (const key in notesResponse) {
+            if (notesResponse.hasOwnProperty(key)) {
+              this.notesMap.set(notesResponse[key].note_id, notesResponse[key]);
+            }
           }
-        }
-        this.notesArraySubject.next(this.notesArray);
-        // below assignment is not working. check why?
-        // this.notesArray = Object.values(notesResponse);
-        // this.notesArray = Object.keys(notesResponse).map(i => notesResponse[i]);
-      }, err => {
-        const errors = err.error;
-        console.log(err);
-        // Handle the scenario whent the mongodb server is down
-        /**
-         * exceptionMessage: "Timed out after 30000 ms while waiting to connect.
-         * Client view of cluster state is
-         * {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING,
-         * exception={com.mongodb.MongoSocketOpenException: Exception opening socket},
-         * caused by {java.net.ConnectException: Connection refused (Connection refused)}}];
-         */
-        console.log('some error occurred while retrieving the notes. We will be trying again.');
-      });
+
+          this.notesMapSubject.next(this.notesMap);
+
+          // below assignment is not working. check why?
+          // this.notesArray = Object.values(notesResponse);
+          // this.notesArray = Object.keys(notesResponse).map(i => notesResponse[i]);
+        }, err => {
+
+          console.error('fill notes array: ERROR');
+          const errors = err.error;
+          console.log(err);
+          // Handle the scenario whent the mongodb server is down
+          /**
+           * exceptionMessage: "Timed out after 30000 ms while waiting to connect.
+           * Client view of cluster state is
+           * {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING,
+           * exception={com.mongodb.MongoSocketOpenException: Exception opening socket},
+           * caused by {java.net.ConnectException: Connection refused (Connection refused)}}];
+           */
+          console.log('some error occurred while retrieving the notes. We will be trying again.');
+        });
+    }
   }
 
   setCommonHeaders() {
@@ -125,6 +124,11 @@ export class NotesService {
     */
 
     return headers;
+  }
+
+  clearNotesService() {
+
+    this.notesMap.clear();
   }
 
 }

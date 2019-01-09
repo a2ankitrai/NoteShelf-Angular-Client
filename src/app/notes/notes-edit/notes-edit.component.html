@@ -7,16 +7,32 @@
       <label for="note_title">Note Title</label>
       <input type="text" class="form-control" id="note_title" formControlName="note_title" aria-describedby="note_title_help"
         placeholder="Your Note Title">
-      <small id="note_title_help" class="form-text text-muted">Give a small heading to your note</small>
+      <small id="note_title_help" class="form-text text-muted">Give a small title to your note</small>
       <small *ngIf="!noteForm.get('note_title').valid && noteForm.get('note_title').touched" class="text-muted">
         Note Title is required. Minimum length : 3 characters </small>
     </div>
-    <div class="form-group">
+
+    <!-- <div class="form-group">
       <label for="note_content">Note Content</label>
       <textarea class="form-control" id="note_content" formControlName="note_content" rows="10" placeholder="Your Note Content"></textarea>
       <small *ngIf="!noteForm.get('note_content').valid && noteForm.get('note_content').touched" class="text-muted">
         Note Content is required. Minimum length : 5 characters </small>
+    </div> -->
+
+    <div class="form-group">
+      <label for="note_content">Note Content</label>
+      <!-- <quill-editor [(ngModel)]="editorText" [modules]="toolBar" [style]="{height: '250px'}" [placeholder]="placeholderText"
+        [required]="true" sanitize="true"></quill-editor>  [style]="style" -->
+
+        <quill-editor formControlName="note_content" [modules]="toolBar"  [style]="style" [placeholder]="placeholderText"
+        [required]="true" sanitize="true" bounds= "document.body"></quill-editor>
+
+
+      <!-- <textarea class="form-control" id="note_content" formControlName="note_content" rows="10" placeholder="Your Note Content"></textarea> -->
+      <small *ngIf="!noteForm.get('note_content').valid && noteForm.get('note_content').touched" class="text-muted">
+        Note Content is required. Minimum length : 5 characters </small>
     </div>
+
     <button type="submit" class="btn btn-primary">{{saveUpdateLabel}}</button>
 
     <!-- 

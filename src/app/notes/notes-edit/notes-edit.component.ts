@@ -1,3 +1,4 @@
+import { QuillEditorService } from './../service/quill-editor.service';
 import { NotesService } from './../service/notes.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,7 +19,23 @@ export class NotesEditComponent implements OnInit {
   saveUpdateLabel: string;
   formInvalid: boolean;
 
-  constructor(private formBuilder: FormBuilder, private notesService: NotesService, private route: ActivatedRoute) { }
+  /**
+   * Editor related configuration..
+   */
+
+  placeholderText: string;
+  toolBar: object;
+  style: object;
+
+  constructor(private formBuilder: FormBuilder,
+    private notesService: NotesService,
+    private route: ActivatedRoute,
+    private quillEditorService: QuillEditorService) {
+
+    this.placeholderText = quillEditorService.placeholderText;
+    this.toolBar = quillEditorService.toolBar;
+    this.style = quillEditorService.style;
+  }
 
   ngOnInit() {
 
@@ -58,16 +75,9 @@ export class NotesEditComponent implements OnInit {
 
       this.notesService.updateNote(this.note).subscribe(response => {
         const newNote = response.body as Note;
-        this.notesService.notesArray.forEach(function (existingNote) {
-          if (existingNote.note_id === newNote.note_id) {
-            existingNote.note_title = newNote.note_title;
-            existingNote.note_content = newNote.note_content;
-            existingNote.updated_date = newNote.updated_date;
-          }
-        });
-        console.log('inside update: end');
 
-        this.notesService.notesArraySubject.next(this.notesService.notesArray);
+        this.notesService.notesMap.set(newNote.note_id, newNote);
+        this.notesService.notesMapSubject.next(this.notesService.notesMap);
 
         this.noteForm.reset();
       }, err => {
@@ -83,8 +93,10 @@ export class NotesEditComponent implements OnInit {
 
         const noteResponse = response.body as Note;
         console.log(noteResponse);
-        this.notesService.notesArray.push(noteResponse);
-        this.notesService.notesArraySubject.next(this.notesService.notesArray);
+
+        this.notesService.notesMap.set(noteResponse.note_id, noteResponse);
+        this.notesService.notesMapSubject.next(this.notesService.notesMap);
+
         this.noteForm.reset();
       }, err => {
         const errors = err.error;

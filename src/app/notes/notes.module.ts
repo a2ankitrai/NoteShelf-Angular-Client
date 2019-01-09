@@ -7,13 +7,22 @@ import { NotesCollectionComponent } from './notes-collection/notes-collection.co
 import { NotesEditComponent } from './notes-edit/notes-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoteCardComponent } from './notes-collection/note-card/note-card.component';
+import { QuillModule } from 'ngx-quill';
+import { TrimHtmlPipe } from './pipe/trim-html.pipe';
 
 @NgModule({
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    NotesRoutingModule
+    NotesRoutingModule,
+    QuillModule
   ],
-  declarations: [NotesComponent, NotesCollectionComponent, NotesEditComponent, NoteCardComponent]
+  declarations: [
+    NotesComponent,
+    NotesCollectionComponent,
+    NotesEditComponent,
+    NoteCardComponent,
+    TrimHtmlPipe
+  ]
 })
 export class NotesModule { }

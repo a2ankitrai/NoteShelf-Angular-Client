@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotesComponent } from './notes/notes.component';
 
 const routes: Routes = [
-  { path: 'notes', component: NotesComponent },
+  { path: 'notes', component: NotesComponent},
   { path: 'create-note', component: NotesEditComponent, canDeactivate: [CanDeactivateNoteEditGuard] },
   {
     path: 'edit-note/:id', component: NotesEditComponent, resolve: {

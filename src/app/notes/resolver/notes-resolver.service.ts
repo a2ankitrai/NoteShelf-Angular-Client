@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class NotesResolverService implements Resolve<Note> {
+export class NotesResolverService implements Resolve<object> {
 
   constructor(private notesService: NotesService, private route: Router) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Note> | Promise<any> | Note {
+  ): object {
     const id = route.paramMap.get('id');
-    return this.notesService.fetchNoteById(route.params.id)[0];
+    return this.notesService.fetchNoteById(route.params.id);
   }
 }
