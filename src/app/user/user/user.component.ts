@@ -76,7 +76,9 @@ export class UserComponent implements OnInit {
           });
       }
     } else {
-      this.routeToSignInPage();
+      if (!this.router.url.includes('reset-password')) {
+        this.routeToSignInPage();
+      }
     }
 
   }

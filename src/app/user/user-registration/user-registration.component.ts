@@ -1,9 +1,10 @@
 import { UserService } from '../service/user.service';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserRegistration } from '../model/userRegistration.model';
 import { NsCommonService } from '../../common/service/ns-common.service';
-
+import * as AppConstant from 'src/app/common/constant/app-constant';
+import { MustMatch } from 'src/app/common/validators/must-match.validator';
 
 @Component({
   selector: 'app-user-registration',
@@ -37,21 +38,18 @@ export class UserRegistrationComponent implements OnInit {
 
     this.userRegistrationForm = this.formBuilder.group({
       user_name: ['', [Validators.required, Validators.minLength(3)]],
-      // first_name: ['', Validators.required],
-      // last_name: ['', Validators.required],
-      email_address: ['', Validators.required],
+      email_address: ['', Validators.required, Validators.email],
       password: ['', Validators.required],
-      confirm_password: ['', Validators.required]
-    });
+      confirm_password: ['', Validators.required],
+      auth_type: [AppConstant.AUTH_TYPE_APP]
+    }, {
+        validator: MustMatch('password', 'confirm_password')
+      });
   }
 
-  // get user_name() { return this.userRegistrationForm.get('user_name'); }
-  // get first_name() { return this.userRegistrationForm.get('first_name'); }
-  // get last_name() { return this.userRegistrationForm.get('last_name'); }
-  // get email_address() { return this.userRegistrationForm.get('email_address'); }
-  // get password() { return this.userRegistrationForm.get('password'); }
-  // get confirm_password() { return this.userRegistrationForm.get('confirm_password'); }
-
+  get f() {
+    return this.userRegistrationForm.controls;
+  }
 
   onRegistrationFormSubmit() {
     console.log('registration form being submit: start');
@@ -102,14 +100,18 @@ export class UserRegistrationComponent implements OnInit {
           console.error('Internal Server Error Occured');
           console.log(errors.exceptionMessage);
           this.serverSideErrors = errors.exceptionMessage;
-        }
-
-        if (err.status === 400 && err.error.validationErrors) {
+        } else if (err.status === 400 && err.error.validationErrors) {
 
           console.log('Validation errors found');
           this.serverValidationErrors = new Array();
           this.serverValidationErrors = err.error.validationErrors;
+        } else {
+          // Error while connecting to the back-end server
+          console.log('Error while connecting to the back-end server');
+          this.serverSideErrors = 'Error while connecting to the back-end server';
         }
+
+
         this.registrationFailure = true;
 
       }

@@ -74,6 +74,9 @@ export class UserSigninComponent implements OnInit {
         // convert below into a function in logged in user setting partial information
         // use type casting in typescript `as`
         this.commonService.setUser(loginResponse as LoggedInUser);
+        console.log('logged in user details');
+
+        console.log(this.commonService.getUser());
         this.commonService.userLoggedInSubject.next(true);
 
         this.router.navigate(['../home'], { relativeTo: this.route });

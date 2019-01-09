@@ -20,11 +20,21 @@
             Password is required </small>
         </div>
 
-        <br />
-        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        </div>
+
+        <div class="form-group">
+          <p><a routerLink="/user/forgot-password" routerLinkActive="active">Forgot Password</a></p>
+        </div>
+
+        <div class="form-group">
+          <p>Do not have an account? <a routerLink="../sign-up" routerLinkActive="active">Sign Up</a>
+          </p>
+        </div>
       </form>
 
-      <a href="">Forgot Password</a>
+
       <br />
       <div *ngIf="formInvalid" class="alert alert-danger" role="alert">
         {{errorMessage}}
@@ -36,16 +46,16 @@
       <div>
         <a class="btn btn-block btn-social btn-google" (click)="googleSignIn()" style="color: white">
           <span class="fa fa-google"></span>Google
-        </a> 
+        </a>
       </div>
       <hr>
       <div>
         <a class="btn btn-block btn-social btn-github" (click)="githubSignIn()" style="color: white">
           <span class="fa fa-github"></span>GitHub
-        </a> 
+        </a>
       </div>
       <hr>
-      <div>
+      <!-- <div>
         <a class="btn btn-block btn-social btn-twitter" style="color: white">
           <span class="fa fa-twitter"></span>Twitter
         </a>
@@ -53,7 +63,7 @@
       <hr>
       <a class="btn btn-block btn-social btn-facebook">
         <span class="fa fa-facebook"></span>Facebook
-      </a>
+      </a> -->
 
     </div>
 

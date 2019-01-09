@@ -13,32 +13,13 @@
             <small *ngIf="!userRegistrationForm.get('user_name').valid && userRegistrationForm.get('user_name').touched"
               class="text-muted">
               {{user_name_error_message}}</small>
-
-
           </div>
         </div>
-
-        <!-- <div class="form-group row">
-          <label for="first_name" class="col-sm-2 col-md-4 col-form-label">First Name</label>
-          <div class="col-sm-10 col-md-8">
-            <input type="text" class="form-control" id="first_name" formControlName="first_name" placeholder="First Name">
-
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="last_name" class="col-sm-2 col-md-4 col-form-label">Last Name</label>
-          <div class="col-sm-10 col-md-8">
-            <input type="text" class="form-control" id="last_name" formControlName="last_name" placeholder="Last Name">
-
-          </div>
-        </div> -->
 
         <div class="form-group row">
           <label for="email_address" class="col-sm-2 col-md-4 col-form-label">Email Address</label>
           <div class="col-sm-10 col-md-8">
             <input type="text" class="form-control" id="email_address" formControlName="email_address" placeholder="Email Address">
-
           </div>
         </div>
 
@@ -59,7 +40,19 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!userRegistrationForm.valid" class="btn btn-success">Sign Up</button>
+        <div class="form-group row">
+          <div class="col-sm-10 col-md-8">
+            <button type="submit" [disabled]="!userRegistrationForm.valid" class="btn btn-success btn-lg">Sign Up</button>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-10 col-md-8">
+            Already have an account?
+            <a routerLink="../sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Sign
+              In</a>
+          </div>
+        </div>
       </form>
 
       <br>
