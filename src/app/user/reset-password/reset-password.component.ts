@@ -1,3 +1,4 @@
+import { enterAnimation } from './../../common/animations/animations';
 import { UserDto } from './../model/user-dto.model';
 import { TokenVerificationResponse } from './../model/token-verification-response.model';
 import { UserService } from './../service/user.service';
@@ -12,7 +13,10 @@ import { MustMatch } from 'src/app/common/validators/must-match.validator';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css']
+  styleUrls: ['./reset-password.component.css'],
+  animations: [
+    enterAnimation
+  ],
 })
 export class ResetPasswordComponent implements OnInit {
 

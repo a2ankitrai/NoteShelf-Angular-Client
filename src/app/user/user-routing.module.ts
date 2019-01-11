@@ -16,9 +16,9 @@ const routes: Routes = [
           tokenResponse: ResetPasswordResolverService
         }
       },
-      { path: 'sign-in', component: UserSigninComponent },
+      { path: 'sign-in', component: UserSigninComponent, data: { animation: 'LoginPage' } },
       { path: 'sign-up', component: UserRegistrationComponent },
-      { path: 'home', component: UserHomeComponent },
+      { path: 'home', component: UserHomeComponent, data: { animation: 'HomePage' } },
       { path: 'forgot-password', component: ForgotPasswordComponent }
 
     ]

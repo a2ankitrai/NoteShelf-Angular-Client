@@ -6,11 +6,15 @@ import { LoggedInUser } from '../../model/logged-in-user.model';
 import { HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import * as AppConstant from 'src/app/common/constant/app-constant';
+import { enterAnimation } from '../../animations/animations';
 
 @Component({
   selector: 'app-social-login',
   templateUrl: './social-login.component.html',
-  styleUrls: ['./social-login.component.css']
+  styleUrls: ['./social-login.component.css'],
+  animations: [
+    enterAnimation
+  ],
 })
 export class SocialLoginComponent implements OnInit {
 

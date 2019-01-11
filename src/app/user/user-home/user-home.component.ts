@@ -1,3 +1,4 @@
+import { enterAnimation } from './../../common/animations/animations';
 import { LoggedInUser } from './../../common/model/logged-in-user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -8,7 +9,10 @@ import { UserService } from '../service/user.service';
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.css']
+  styleUrls: ['./user-home.component.css'],
+  animations: [
+    enterAnimation
+  ]
 })
 export class UserHomeComponent implements OnInit {
 

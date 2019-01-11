@@ -1,3 +1,4 @@
+import { enterAnimation } from './../../common/animations/animations';
 import { LocalStorageService } from './../../common/service/local-storage.service';
 import { LoggedInUser } from './../../common/model/logged-in-user.model';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
@@ -11,7 +12,10 @@ import * as AppConstant from 'src/app/common/constant/app-constant';
 @Component({
   selector: 'app-user-signin',
   templateUrl: './user-signin.component.html',
-  styleUrls: ['./user-signin.component.css']
+  styleUrls: ['./user-signin.component.css'],
+  animations: [
+    enterAnimation
+  ]
 })
 export class UserSigninComponent implements OnInit {
 

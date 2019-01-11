@@ -1,4 +1,4 @@
-import { error } from 'protractor';
+import { enterAnimation } from './../../common/animations/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NsCommonService } from 'src/app/common/service/ns-common.service';
@@ -10,7 +10,10 @@ import { NsGenericResponse } from 'src/app/common/model/ns-generic-response';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
+  animations: [
+    enterAnimation
+  ],
 })
 export class ForgotPasswordComponent implements OnInit {
 

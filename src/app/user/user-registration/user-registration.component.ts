@@ -1,3 +1,4 @@
+import { enterAnimation } from './../../common/animations/animations';
 import { UserService } from '../service/user.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +10,10 @@ import { MustMatch } from 'src/app/common/validators/must-match.validator';
 @Component({
   selector: 'app-user-registration',
   templateUrl: './user-registration.component.html',
-  styleUrls: ['./user-registration.component.css']
+  styleUrls: ['./user-registration.component.css'],
+  animations: [
+    enterAnimation
+  ]
 })
 export class UserRegistrationComponent implements OnInit {
 
