@@ -1,6 +1,7 @@
+import { LocalStorageService } from './local-storage.service';
 import { Injectable } from '@angular/core';
 import { LoggedInUser } from '../model/logged-in-user.model';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import * as AppConstant from 'src/app/common/constant/app-constant';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
@@ -20,12 +21,16 @@ export class NsCommonService {
   userLoggedInObservable: Observable<boolean>;
   userLoggedInSubject: Subject<boolean>;
 
-  constructor() {
+  constructor(private localStorageService: LocalStorageService, private http: HttpClient) {
     this.userLoggedInSubject = new Subject<boolean>();
     this.userLoggedInObservable = this.userLoggedInSubject.asObservable();
   }
 
   getSessionToken() {
+
+    if (this.sessionToken === undefined || this.sessionToken === null) {
+      this.sessionToken = this.localStorageService.getItem(AppConstant.SESSION_TOKEN);
+    }
     return this.sessionToken;
   }
 
@@ -50,10 +55,26 @@ export class NsCommonService {
 
   setUser(user: LoggedInUser) {
     this.user = user;
+    this.userLoggedInSubject.next(true);
   }
 
   getUser() {
-    return this.user;
+    if (this.user === undefined) {
+      this.getLoggedInUserFromSessionToken().subscribe(
+        res => {
+          this.setUser(res.body as LoggedInUser);
+          return this.user;
+        },
+        err => {
+          console.log(err);
+          console.error('error occured while retrieving user from stored session.');
+          this.localStorageService.removeItem(AppConstant.SESSION_TOKEN);
+          return undefined;
+        }
+      );
+    } else {
+      return this.user;
+    }
   }
 
   routeToSignInPage(router: Router) {
@@ -62,6 +83,12 @@ export class NsCommonService {
 
   routeToHomePage(router: Router) {
     router.navigate(['/user/home']);
+  }
+
+  getLoggedInUserFromSessionToken() {
+    const headers = this.setCommonHeaders();
+
+    return this.http.get(AppConstant.NS_ENDPOINT + 'user/detail', { headers: headers, 'observe': 'response' });
   }
 
 }

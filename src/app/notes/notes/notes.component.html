@@ -1,7 +1,15 @@
 <!-- [@enterAnimation]="enterAnimation" -->
-<div class="container" >
+<div class="container">
 
-  <a [routerLink]="['/create-note']" routerLinkActive="active" > Create New Note</a>
+    <h2>Notes</h2>
+  <!-- <a [routerLink]="['/create-note']" routerLinkActive="active"> Create New Note</a> -->
+
+  <a class="btn btn-info btn-round-lg btn-lg text-capitalize" role="button" [routerLink]="['/create-note']">
+    <i class="fa fa-plus-circle fa-lg mr-2" aria-hidden="true"></i>
+    Create New Note
+    <!-- <i class="fa fa-power-off fa-lg"></i> -->
+  </a>
+
   <!--
     in case of new note open above without passing any data.
 
@@ -13,7 +21,7 @@
     Use it to store items such as page titles, breadcrumb text, and other read-only, static data.
   -->
 
-  <h3>Notes Section</h3>
+  
   <app-notes-collection></app-notes-collection>
 
 

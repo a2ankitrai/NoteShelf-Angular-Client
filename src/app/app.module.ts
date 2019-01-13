@@ -18,6 +18,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { PolicyComponent } from './common/component/policy/policy.component';
 import { AboutComponent } from './common/component/about/about.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// For MDB Angular Free
+import { NavbarModule, WavesModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     RoutingModule,
     FormsModule,
+    NgbModule,
+    NavbarModule,
+    WavesModule,
+    MDBBootstrapModule.forRoot(),
     HttpClientModule,
     NotesModule,
     UserModule,

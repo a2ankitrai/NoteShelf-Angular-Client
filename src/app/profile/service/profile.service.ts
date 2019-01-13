@@ -36,4 +36,14 @@ export class ProfileService {
 
     return this.http.post('http://localhost:9000/user/logout', null, { headers: headers });
   }
+
+  updateProfilePicture(imageFile: File) {
+    const headers = this.commonService.setCommonHeaders();
+
+    const formdata: FormData = new FormData();
+    formdata.append('picture', imageFile);
+
+    return this.http.put(AppConstant.NS_ENDPOINT + 'profile/picture', imageFile,
+      { headers: headers, reportProgress: true, 'observe': 'response' });
+  }
 }

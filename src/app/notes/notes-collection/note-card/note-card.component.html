@@ -12,9 +12,17 @@
 <!-- <a [routerLink]="['/edit-note', note.note_id]" routerLinkActive="router-link-active" routerLinkActive="active"> -->
 <div class="card">
   <div class="card-header text-right">
-    <button class="btn btn-primary" (click)="editNote()">Edit</button>
+
+    <button class="btn btn-primary btn-round text-capitalize" (click)="editNote()">
+      <i class="fa fa-edit fa-lg mr-2" aria-hidden="true"></i>
+      Edit</button>
+
+    <!-- <button mdbBtn type="button" gradient="peach" rounded="true" mdbWavesEffect (click)="editNote()">Edit</button> -->
+
     &nbsp;
-    <button class="btn btn-danger" (click)="deleteNote()">Delete</button>
+    <button class="btn btn-danger btn-round text-capitalize" (click)="deleteNote()">
+      <i class="fa fa-trash fa-lg mr-2" aria-hidden="true"></i>
+      Delete</button>
   </div>
   <div class="card-body">
     <h5 class="card-title">{{note.note_title}}</h5>

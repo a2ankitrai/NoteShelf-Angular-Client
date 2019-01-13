@@ -5,15 +5,19 @@ import { LocalStorageService } from './../../service/local-storage.service';
 import { UserService } from './../../../user/service/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NsCommonService } from 'src/app/common/service/ns-common.service';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
+  // templateUrl: './header.component.2.html',
+  // styleUrls: ['./header.component.2.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
 
   headerRightSideTemplate: TemplateRef<any>;
   userLoggedIn: boolean;
@@ -38,6 +42,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+
+  }
+
   redirectHomeSignIn() {
     if (this.userLoggedIn) {
       this.commonService.routeToHomePage(this.router);
@@ -47,9 +55,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logoutUser() {
-
-    console.log('logging out user...');
-
     if (this.loggedInUser.authType === AppConstant.AUTH_TYPE_APP) {
       this.userService.logoutUser().subscribe(res => {
         console.log(res);
@@ -70,9 +75,6 @@ export class HeaderComponent implements OnInit {
   clearLoggedInUserDetails() {
 
     if (this.loggedInUser.authType === AppConstant.AUTH_TYPE_APP) {
-
-      console.log('auth type is app ');
-
       this.userService.logoutUser();
       this.commonService.setSessionToken(null);
       this.localStorageService.removeItem(AppConstant.SESSION_TOKEN);
