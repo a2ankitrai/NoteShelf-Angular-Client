@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" @enterAnimation>
   <h2>Manage your Personal Information</h2>
 
   <br><br>
@@ -13,13 +13,32 @@
 
     <hr>
 
-    <form [formGroup]="pictureForm" (ngSubmit)="onPictureFormSubmit()">
+    <!--  <form [formGroup]="pictureForm" (ngSubmit)="onPictureFormSubmit()">
 
       <div class="form-group row">
         <label for="profile_picture" class="col-sm-2 col-md-4 col-form-label">Profile Picture</label>
-        <!-- <div class="col-sm-10 col-md-8">
-        <img src="src/app/profile/profile/images/pp1.jpg" id="profile_picture" class="rounded-circle" alt="image not found">
-      </div> -->
+        <div class="col-sm-2 col-md-4">
+          <div class="text-center">
+            <img [src]="imgURL" class="avatar rounded-circle" height="150" width="150" alt="avatar" *ngIf="imgURL">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <span class="align-middle">
+            <label class="btn btn-default btn-file btn-mdb-color btn-round-lg float-left">
+              <i class="fa fa-file-photo-o fa-lg mr-2"></i> Upload Picture
+              <input type="file" style="display: none;" class="form-control" id="profile_picture" formControlName="profile_picture"
+                accept='image/*' (change)="previewAndUploadFile($event)">
+            </label>
+          </span>
+        </div>
+      </div> 
+    </form>-->
+
+    <form [formGroup]="profileForm" (ngSubmit)="updateProfileInformation()">
+
+      <div class="form-group row">
+        <label for="profile_picture" class="col-sm-2 col-md-4 col-form-label">Profile Picture</label>
 
         <div class="col-sm-2 col-md-4">
           <div class="text-center">
@@ -31,15 +50,12 @@
           <span class="align-middle">
             <label class="btn btn-default btn-file btn-mdb-color btn-round-lg float-left">
               <i class="fa fa-file-photo-o fa-lg mr-2"></i> Upload Picture
-              <input #file type="file" style="display: none;" class="form-control" id="profile_picture" formControlName="profile_picture"
-                accept='image/*' (change)="preview(file.files)">
+              <input type="file" style="display: none;" class="form-control" id="profile_picture" formControlName="profile_picture"
+                accept='image/*' (change)="previewAndUploadFile($event)">
             </label>
           </span>
         </div>
       </div>
-    </form>
-
-    <form [formGroup]="profileForm" (ngSubmit)="onProfileFormSubmit()">
 
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">User Name</label>
@@ -52,14 +68,24 @@
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">First Name</label>
         <div class="col-sm-10 col-md-8">
-          <input type="text" class="form-control" id="first_name" formControlName="first_name">
+          <input type="text" class="form-control" id="first_name" formControlName="first_name" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.first_name.errors }">
+          <div *ngIf="profileFormSubmitted && prf.first_name.errors" class="invalid-feedback">
+            <div *ngIf="prf.first_name.errors.required">First name is required</div>
+            <div *ngIf="prf.first_name.errors.minlength">First name must be at least 3 characters</div>
+            <div *ngIf="prf.first_name.errors.maxlength">First can must be at max 20 characters</div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Last Name</label>
         <div class="col-sm-10 col-md-8">
-          <input type="text" class="form-control" id="last_name" formControlName="last_name">
+          <input type="text" class="form-control" id="last_name" formControlName="last_name" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.last_name.errors }">
+          <div *ngIf="profileFormSubmitted && prf.last_name.errors" class="invalid-feedback">
+            <div *ngIf="prf.last_name.errors.required">Last name is required</div>
+            <div *ngIf="prf.last_name.errors.minlength">Last name must be at least 1 character</div>
+            <div *ngIf="prf.last_name.errors.maxlength">Last name can be at max 20 characters</div>
+          </div>
         </div>
       </div>
 
@@ -68,35 +94,51 @@
         <div class="col-sm-10 col-md-8">
           <input type="text" class="form-control" id="gender" formControlName="gender">
         </div>
+
       </div>
 
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Work</label>
         <div class="col-sm-10 col-md-8">
-          <input type="text" class="form-control" id="work" formControlName="work">
+          <input type="text" class="form-control" id="work" formControlName="work" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.work.errors }">
+          <div *ngIf="profileFormSubmitted && prf.work.errors" class="invalid-feedback">
+            <div *ngIf="prf.work.errors.maxlength">Work can be at max 20 characters</div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Contact Number</label>
         <div class="col-sm-10 col-md-8">
-          <input type="text" class="form-control" id="contact_number" formControlName="contact_number">
+          <input type="text" class="form-control" id="contact_number" formControlName="contact_number" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.contact_number.errors }">
+          <div *ngIf="profileFormSubmitted && prf.contact_number.errors" class="invalid-feedback">
+            <div *ngIf="prf.contact_number.errors.minlength">Contact Number must be at least 6 digits</div>
+            <div *ngIf="prf.contact_number.errors.maxlength">Contact Number can be at max 11 digits</div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Date of Birth</label>
         <div class="col-sm-10 col-md-8">
+          <input type="text" placeholder="" id="date_of_birth" formControlName="date_of_birth" class="form-control"
+            bsDatepicker [bsConfig]="bsDatepickerConfig" placement="bottom" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.date_of_birth.errors }">
+          <div *ngIf="profileFormSubmitted && prf.date_of_birth.errors" class="invalid-feedback">
+            <div *ngIf="prf.date_of_birth.errors">Entered Date Format is not valid</div>
+          </div>
+
+          <!-- { dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-blue' } -->
           <!-- <input type="text" class="form-control" id="date_of_birth" formControlName="date_of_birth"> -->
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+          <!-- <div class="input-group">
+             <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="date_of_birth" formControlName="date_of_birth"
+              ngbDatepicker #d="ngbDatepicker"> 
             <div class="input-group-append">
               <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
-
+      <!-- 
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Birth Date</label>
         <div class="col-sm-10 col-md-8">
@@ -109,18 +151,23 @@
         <div class="col-sm-10 col-md-8">
           <input type="text" class="form-control" id="birth_year" formControlName="birth_year">
         </div>
-      </div>
+      </div> -->
 
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Language</label>
         <div class="col-sm-10 col-md-8">
-          <input type="text" class="form-control" id="language" formControlName="language">
+          <input type="text" class="form-control" id="language" formControlName="language" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.language.errors }">
+          <div *ngIf="profileFormSubmitted && prf.language.errors" class="invalid-feedback">
+            <div *ngIf="prf.language.errors.minlength">Language must be at least 3 characters</div>
+            <div *ngIf="prf.language.errors.maxlength">Language can be at max 20 characters</div>
+          </div>
         </div>
       </div>
 
       <div class="row justify-content-end">
         <div class="col-8">
-          <button type="submit" [disabled]="!profileForm.valid" class="btn btn-success">Save</button>
+          <!-- [disabled]="!profileForm.valid" -->
+          <button type="submit" class="btn btn-success">Save</button>
         </div>
       </div>
 
@@ -128,8 +175,11 @@
     </form>
     <br>
 
-    <div [ngClass]="responseAlertClass" role="alert">
+    <!-- <div [ngClass]="responseAlertClass" role="alert">
       {{responseMessage}}
+    </div> -->
+    <div>
+      <ngb-alert *ngIf="alertMessage" [type]="alertType" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
     </div>
 
     <!-- update the response here...-->

@@ -19,5 +19,10 @@ export const LOGGED_IN_USER = 'LOGGED_IN_USER';
 
 export const AUTH_TYPE_APP = 'APP';
 
+// BootStrap css constants
+
+export const SUCCESS = 'success';
+export const DANGER = 'danger';
+
 
 

@@ -96,6 +96,7 @@ export class UserSigninComponent implements OnInit {
           this.errorMessage = 'Unknown Error while connecting to the server. Backend might be down.';
         }
 
+        // alert the user about failures..
         // invald credentials
       }
     );

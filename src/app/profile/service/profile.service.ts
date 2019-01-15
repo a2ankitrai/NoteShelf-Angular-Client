@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { NsCommonService } from 'src/app/common/service/ns-common.service';
 import * as AppConstant from 'src/app/common/constant/app-constant';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -20,9 +21,9 @@ export class ProfileService {
     return this.http.get(AppConstant.NS_ENDPOINT + 'profile', { headers: headers, 'observe': 'response' });
   }
 
-  getUserProfilePictureByUserId(userId: string) {
+  getProfilePicture(): Observable<Blob> {
     const headers = this.commonService.setCommonHeaders();
-    return this.http.get(AppConstant.NS_ENDPOINT + 'profile/picture', { headers: headers, 'observe': 'response' });
+    return this.http.get(AppConstant.NS_ENDPOINT + 'profile/picture', { headers: headers, responseType: 'blob' });
   }
 
   saveUserProfile(profile: Profile) {
@@ -37,13 +38,15 @@ export class ProfileService {
     return this.http.post('http://localhost:9000/user/logout', null, { headers: headers });
   }
 
-  updateProfilePicture(imageFile: File) {
-    const headers = this.commonService.setCommonHeaders();
+  updateProfilePicture(imageFile: any) {
 
+    let headers = new HttpHeaders();
+    // headers = headers.set('Content-Type', 'application/json');
+    // headers = headers.set('Content-Type', 'multipart/form-data');
+    headers = headers.set(AppConstant.X_AUTH_TOKEN, this.commonService.getSessionToken());
     const formdata: FormData = new FormData();
     formdata.append('picture', imageFile);
-
-    return this.http.put(AppConstant.NS_ENDPOINT + 'profile/picture', imageFile,
-      { headers: headers, reportProgress: true, 'observe': 'response' });
+    return this.http.put(AppConstant.NS_ENDPOINT + 'profile/picture', formdata,
+      { headers: headers, 'observe': 'response' });
   }
 }

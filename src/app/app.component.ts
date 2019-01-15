@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 
 @Component({
@@ -8,8 +9,24 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'noteshelf-angular-client';
+  loading = true;
 
+  constructor(private router: Router) {
+    router.events.subscribe((routerEvent: Event) => {
+      this.checkRouterEvent(routerEvent);
+    });
+  }
 
-  constructor() { }
+  checkRouterEvent(routerEvent: Event): void {
+    if (routerEvent instanceof NavigationStart) {
+      this.loading = true;
+    }
+
+    if (routerEvent instanceof NavigationEnd ||
+      routerEvent instanceof NavigationCancel ||
+      routerEvent instanceof NavigationError) {
+      this.loading = false;
+    }
+  }
 
 }
