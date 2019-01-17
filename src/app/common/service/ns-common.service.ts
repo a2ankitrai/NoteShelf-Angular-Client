@@ -85,6 +85,10 @@ export class NsCommonService {
     router.navigate(['/user/home']);
   }
 
+  routeToIntroPage(router: Router) {
+    router.navigate(['/']);
+  }
+
   getLoggedInUserFromSessionToken() {
     const headers = this.setCommonHeaders();
 

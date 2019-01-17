@@ -1,27 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('app/common/stylesheets/font-awesome.min.css');
-
-@import url('app/common/stylesheets/docs.css');  
+@import url('app/common/stylesheets/docs.css');
 @import url('app/common/stylesheets/bootstrap-social.css');
-
 .center {
     text-align: center
 }
 
-.btn-round-lg{
+.btn-round-lg {
     border-radius: 30px;
-    }
-.btn-round{
-    border-radius: 22px;
-    }
-.btn-round-sm{
-    border-radius: 15px;
-    }
+}
 
-.btn-round-xs{
+.btn-round {
+    border-radius: 22px;
+}
+
+.btn-round-sm {
+    border-radius: 15px;
+}
+
+.btn-round-xs {
     border-radius: 11px;
     padding-left: 10px;
     padding-right: 10px;
 }
-    
+
+.content-margin {
+    margin-top: 1%;
+    margin-bottom: 2%;
+}

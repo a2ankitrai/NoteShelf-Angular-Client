@@ -22,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // For MDB Angular Free
-import { NavbarModule, WavesModule } from 'angular-bootstrap-md';
+// import { NavbarModule, WavesModule } from 'angular-bootstrap-md';
+import { IntroComponent } from './common/component/intro/intro.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NavbarModule, WavesModule } from 'angular-bootstrap-md';
     PlaygroundComponent,
     SocialLoginComponent,
     PolicyComponent,
-    AboutComponent
+    AboutComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +43,8 @@ import { NavbarModule, WavesModule } from 'angular-bootstrap-md';
     RoutingModule,
     FormsModule,
     NgbModule,
-    NavbarModule,
-    WavesModule,
+    // NavbarModule,
+    // WavesModule,
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
     NotesModule,

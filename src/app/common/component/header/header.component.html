@@ -1,10 +1,18 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue lighten-1 fixed-top scrolling-navbar" [containerInside]="true">
+<!-- navbar-dark navbar-light  blue lighten-1 -->
+<!-- navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar -->
+
+<mdb-navbar [SideClass]="sideClass" [containerInside]="true">
 
     <!-- Navbar brand -->
     <mdb-navbar-brand>
         <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-        <a class="navbar-brand" [routerLink]="[]" routerLinkActive="active" (click)="redirectHomeSignIn()">NoteShelf</a>
+        <!-- <a class="navbar-brand" [routerLink]="[]" routerLinkActive="active" (click)="redirectHomeSignIn()">
+            <strong>NoteShelf</strong>
+        </a> -->
+        <a class="navbar-brand" [routerLink]="[]" routerLinkActive="active" (click)="redirectHomeSignIn()">
+            <strong>NoteShelf</strong>
+        </a>
     </mdb-navbar-brand>
 
     <!-- Collapsible content -->
@@ -65,7 +73,8 @@
                 </li>
                 <li class="nav-item" routerLinkActive="active">
                     <!-- <a class="nav-link waves-dark" mdbWavesEffect routerLink="/user/sign-up">Sign-Up</a> -->
-                    <a class="btn btn-default action-button text-capitalize" role="button" routerLink="/user/sign-up">Sign Up</a>
+                    <a class="btn btn-default action-button text-capitalize" role="button" routerLink="/user/sign-up">Sign
+                        Up</a>
                 </li>
             </ng-template>
 
@@ -82,7 +91,7 @@
                         <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/profile">
                             <i class="fa fa-user fa-lg mr-2"></i>
                             My Profile
-                            
+
                         </a>
                         <a class="dropdown-item waves-light" mdbWavesEffect (click)="logoutUser()">
                             <i class="fa fa-power-off fa-lg mr-2"></i>

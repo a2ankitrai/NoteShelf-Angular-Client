@@ -1,0 +1,35 @@
+/* Required for full background image */
+
+html,
+body,
+header,
+.view {
+  min-height: 100vh;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 100vh;
+  }
+}
+
+.top-nav-collapse {
+  background-color: #f8bbd0 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@media (max-width: 991px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #f8bbd0 !important;
+  }
+}
+
+.mt-0{
+    padding-top: 0% !important;
+}

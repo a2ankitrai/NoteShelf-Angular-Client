@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   headerRightSideTemplate: TemplateRef<any>;
   userLoggedIn: boolean;
   loggedInUser: LoggedInUser;
+  sideClass: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -35,6 +36,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.userLoggedIn = val;
       this.userLoggedIn === true ? this.loggedInUser = this.commonService.getUser() : this.loggedInUser = undefined;
     });
+
+    // this.sideClass = 'navbar navbar-expand-lg navbar-dark blue lighten-1 fixed-top scrolling-navbar';
+    // this.sideClass = 'navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar';
+
+    this.updateHeaderCssClass();
+    this.router.events.subscribe((res) => {
+      this.updateHeaderCssClass();
+
+      // if (this.router.url === '/') {
+      //   this.sideClass = 'navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar';
+      // } else {
+      //   this.sideClass = 'navbar navbar-expand-lg navbar-dark blue fixed-top lighten-1';
+      //   //  mt-2
+      // }
+
+    });
+  }
+
+  updateHeaderCssClass() {
+    if (this.router.url === '/') {
+      this.sideClass = 'navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar';
+    } else {
+      this.sideClass = 'navbar navbar-expand-lg navbar-dark blue lighten-1';
+      //  mt-2
+    }
   }
 
   // postLoginCtx = { userName: this.commonService.getUser().userName };
@@ -50,7 +76,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.userLoggedIn) {
       this.commonService.routeToHomePage(this.router);
     } else {
-      this.commonService.routeToSignInPage(this.router);
+      // this.commonService.routeToSignInPage(this.router);
+      this.commonService.routeToIntroPage(this.router);
     }
   }
 

@@ -1,7 +1,11 @@
-<div class="container" @enterAnimation>
+<div class="container content-margin" @enterAnimation>
   <h2>Manage your Personal Information</h2>
 
-  <br><br>
+  <br>
+  <div>
+    <ngb-alert *ngIf="alertMessage" [type]="alertType" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
+  </div>
+  <br>
 
   <div class="col-xs-12 col-md-12 col-lg-12">
 
@@ -92,7 +96,10 @@
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Gender</label>
         <div class="col-sm-10 col-md-8">
-          <input type="text" class="form-control" id="gender" formControlName="gender">
+          <input type="text" class="form-control" id="gender" formControlName="gender" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.contact_number.errors }">
+          <div *ngIf="profileFormSubmitted && prf.last_name.errors" class="invalid-feedback">
+            <div *ngIf="prf.last_name.errors.maxlength">Gender can be at max 20 characters</div>
+          </div>
         </div>
 
       </div>

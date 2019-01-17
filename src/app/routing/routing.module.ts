@@ -8,11 +8,13 @@ import { UserRoutingModule } from 'src/app/user/user-routing.module';
 import { PageNotFoundComponent } from 'src/app/common/component/page-not-found/page-not-found.component';
 import { ProfileRoutingModule } from 'src/app/profile/profile-routing.module';
 import { PlaygroundComponent } from '../common/component/playground/playground.component';
+import { IntroComponent } from '../common/component/intro/intro.component';
 
 const appRoutes: Routes = [
 
   // { path: 'notes', component: NotesComponent },
-  { path: '', redirectTo: '/user', pathMatch: 'full', },
+  { path: '', component: IntroComponent },
+  // { path: '', redirectTo: '/user', pathMatch: 'full', },
   { path: 'social-login', component: SocialLoginComponent },
   { path: 'playground', component: PlaygroundComponent },
   { path: 'about', component: AboutComponent },

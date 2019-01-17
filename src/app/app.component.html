@@ -1,6 +1,6 @@
 <app-header></app-header>
-<br><br><br>
-<h2 class="display-5" style="text-align: center">Welcome to Noteshelf !</h2>
+<!-- <br><br><br> -->
+<!-- <h2 class="display-5" style="text-align: center">Welcome to Noteshelf !</h2> -->
 <!-- <router-outlet></router-outlet>
 <br>
 <div id="loader" class="myloader" *ngIf="loading">
@@ -11,7 +11,7 @@
 </ng-container>
 
 <ng-template #loadingTemplate>
-    <div id="loader" class="myloader container" *ngIf="loading">
+    <div id="loader" class="myloader container mt-2" *ngIf="loading">
         <h1 class="center">Loading...</h1>
         <div class="center">
             <img src="./assets/images/loading-image.gif" class="avatar rounded-circle" height="200" width="200" alt="avatar">
@@ -20,7 +20,9 @@
 </ng-template>
 
 <ng-template #loadedTemplate>
-    <router-outlet></router-outlet>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
 </ng-template>
-
+<br><br>
 <app-footer></app-footer>

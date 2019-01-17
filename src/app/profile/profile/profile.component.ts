@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit {
       profile_picture: [],
       first_name: [this.profile.first_name, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       last_name: [this.profile.last_name, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
-      gender: [this.profile.gender],
+      gender: [this.profile.gender, [Validators.maxLength(20)]],
       work: [this.profile.work, [Validators.maxLength(20)]],
       contact_number: [this.profile.contact_number, [Validators.minLength(6), Validators.maxLength(11)]],
       date_of_birth: [this.dateOfBirth, [DateValidator()]],
