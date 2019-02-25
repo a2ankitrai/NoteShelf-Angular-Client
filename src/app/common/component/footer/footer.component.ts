@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as AppConstant from 'src/app/common/constant/app-constant';
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
   today: number = Date.now();
-  constructor() { }
+  appName: string;
+  constructor() {
+    this.appName = AppConstant.APP_NAME;
+  }
 
   ngOnInit() {
   }

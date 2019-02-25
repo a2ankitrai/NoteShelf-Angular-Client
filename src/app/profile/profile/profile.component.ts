@@ -46,12 +46,13 @@ export class ProfileComponent implements OnInit {
 
   profileImageBlob: Blob;
 
-
   private alertSubject = new Subject<string>();
   alertMessage: string;
   alertType: string;
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private commonService: NsCommonService,
+  constructor(private formBuilder: FormBuilder,
+    private profileService: ProfileService,
+    private commonService: NsCommonService,
     private route: ActivatedRoute) {
     this.route.data.subscribe(response => {
       this.profile = response.profile.body as Profile;
@@ -110,8 +111,10 @@ export class ProfileComponent implements OnInit {
       // user_name: [this.userName, Validators.required],
       profile_picture: [],
       first_name: [this.profile.first_name, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      last_name: [this.profile.last_name, [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
-      gender: [this.profile.gender, [Validators.maxLength(20)]],
+      last_name: [this.profile.last_name, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      gender: [this.profile.gender,
+        //  [Validators.maxLength(20)]
+      ],
       work: [this.profile.work, [Validators.maxLength(20)]],
       contact_number: [this.profile.contact_number, [Validators.minLength(6), Validators.maxLength(11)]],
       date_of_birth: [this.dateOfBirth, [DateValidator()]],
@@ -205,9 +208,6 @@ export class ProfileComponent implements OnInit {
       this.profile.birth_date = this.dateOfBirth.getDate().toString() + '-' + this.dateOfBirth.getMonth().toString();
       this.profile.birth_year = this.dateOfBirth.getFullYear().toString();
     }
-
-    console.log('profile before submission: ');
-    console.log(this.profile);
 
     this.profileService.saveUserProfile(this.profile).subscribe(response => {
       console.log(response);

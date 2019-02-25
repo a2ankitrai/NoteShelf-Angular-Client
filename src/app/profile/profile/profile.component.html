@@ -96,10 +96,25 @@
       <div class="form-group row">
         <label for="user_name" class="col-sm-2 col-md-4 col-form-label">Gender</label>
         <div class="col-sm-10 col-md-8">
-          <input type="text" class="form-control" id="gender" formControlName="gender" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.contact_number.errors }">
-          <div *ngIf="profileFormSubmitted && prf.last_name.errors" class="invalid-feedback">
-            <div *ngIf="prf.last_name.errors.maxlength">Gender can be at max 20 characters</div>
+          <!-- <input type="text" class="form-control" id="gender" formControlName="gender" [ngClass]="{ 'is-invalid': profileFormSubmitted && prf.contact_number.errors }"> -->
+
+          <!-- <input type="radio" class="form-control" id="gender" formControlName="gender" value="M"> Male
+          <input type="radio" class="form-control" id="gender" formControlName="gender" value="F"> Female -->
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" formControlName="gender" id="genderMale"
+              value="M">
+            <label class="form-check-label" for="genderMale">Male</label>
           </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" formControlName="gender" id="genderFemale"
+              value="F">
+            <label class="form-check-label" for="genderFemale">Female</label>
+          </div>
+
+          <!-- <div *ngIf="profileFormSubmitted && prf.gender.errors" class="invalid-feedback">
+            <div *ngIf="prf.gender.errors.maxlength">Gender can be at max 20 characters</div>
+          </div> -->
         </div>
 
       </div>

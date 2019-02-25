@@ -1,7 +1,6 @@
 import { enterAnimation } from './../../animations/animations';
 import { Component, OnInit } from '@angular/core';
-import { trigger, transition, useAnimation } from '@angular/animations';
-import { bounceIn, fadeOutRight } from 'ng-animate';
+import * as AppConstant from 'src/app/common/constant/app-constant';
 
 @Component({
   selector: 'app-about',
@@ -13,10 +12,15 @@ import { bounceIn, fadeOutRight } from 'ng-animate';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  appName: string;
+
+  constructor() {
+    this.appName = AppConstant.APP_NAME;
+  }
   enterAnimation: any;
 
   ngOnInit() {
+
   }
 
 }

@@ -8,6 +8,7 @@ import { UserLogin } from '../model/userlogin.model';
 import { NsCommonService } from 'src/app/common/service/ns-common.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as AppConstant from 'src/app/common/constant/app-constant';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-signin',
@@ -21,7 +22,13 @@ export class UserSigninComponent implements OnInit {
 
   loginForm: FormGroup;
   formInvalid: boolean;
-  errorMessage = '';
+  // errorMessage = '';
+
+  loginFormSubmitted = false;
+
+  private alertSubject = new Subject<string>();
+  alertMessage: string;
+  alertType: string;
 
   constructor(private userService: UserService,
     private commonService: NsCommonService,
@@ -38,6 +45,7 @@ export class UserSigninComponent implements OnInit {
     });
 
     this.formInvalid = false;
+    this.alertSubject.subscribe((message) => this.alertMessage = message);
   }
 
   githubSignIn() {
@@ -48,20 +56,32 @@ export class UserSigninComponent implements OnInit {
     this.userService.socialSignIn('google');
   }
 
+  get lf() {
+    return this.loginForm.controls;
+  }
+
+
   onLoginSubmit() {
+
+    this.loginFormSubmitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
     this.formInvalid = !this.formInvalid;
 
     const userName = this.loginForm.get('userName');
     const password = this.loginForm.get('password');
 
-    if (!userName.touched || userName.value === '' || !password.touched || password.value === null) {
-      this.formInvalid = true;
-      this.errorMessage = 'Please enter Credentials!';
-      return;
-    } else {
-      this.formInvalid = false;
-      this.errorMessage = '';
-    }
+    // if (!userName.touched || userName.value === '' || !password.touched || password.value === null) {
+    //   this.formInvalid = true;
+    //   this.errorMessage = 'Please enter Credentials!';
+    //   return;
+    // } else {
+    //   this.formInvalid = false;
+    //   this.errorMessage = '';
+    // }
 
     const userLogin = new UserLogin(userName.value, password.value);
 
@@ -87,14 +107,20 @@ export class UserSigninComponent implements OnInit {
 
       },
       err => {
-
         console.log(err);
+        let errorMessage: string;
         if (err.status === 401) {
-          this.formInvalid = true;
-          this.errorMessage = 'Username and/or password is incorrect. Please enter valid credentials.';
+          // this.formInvalid = true;
+          // this.errorMessage = 'Username and/or password is incorrect. Please enter valid credentials.';
+          errorMessage = 'Username and/or password is incorrect. Please enter valid credentials.';
+        } else if (err.status === 403) {
+          errorMessage = 'Account not yet activated. Please verify your by clicking the link sent to you over mail';
         } else {
-          this.errorMessage = 'Unknown Error while connecting to the server. Backend might be down.';
+          errorMessage = 'Unknown Error while connecting to the server. Backend might be down.';
         }
+
+        this.alertType = AppConstant.DANGER;
+        this.alertSubject.next(errorMessage);
 
         // alert the user about failures..
         // invald credentials

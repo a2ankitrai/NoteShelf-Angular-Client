@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as AppConstant from 'src/app/common/constant/app-constant';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  appName: string;
+
+  constructor() {
+    this.appName = AppConstant.APP_NAME;
+  }
 
   ngOnInit() {
   }

@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import * as AppConstant from 'src/app/common/constant/app-constant';
 import { enterAnimation } from '../../animations/animations';
 
+
 @Component({
   selector: 'app-social-login',
   templateUrl: './social-login.component.html',
@@ -19,11 +20,16 @@ import { enterAnimation } from '../../animations/animations';
 export class SocialLoginComponent implements OnInit {
 
   jwtToken: string;
+  appName: string;
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private commonService: NsCommonService,
     private userService: UserService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+  ) {
+    this.appName = AppConstant.APP_NAME;
+  }
 
   ngOnInit() {
     this.jwtToken = this.getParamValueQueryString('token');

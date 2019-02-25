@@ -27,6 +27,8 @@ export class UserRegistrationComponent implements OnInit {
   serverSideErrors: any = undefined;
   response = '';
 
+  userRegistrationFormSubmitted = false;
+
   constructor(private userService: UserService, private commonService: NsCommonService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -41,24 +43,23 @@ export class UserRegistrationComponent implements OnInit {
     // });
 
     this.userRegistrationForm = this.formBuilder.group({
-      user_name: ['', [Validators.required, Validators.minLength(3)]],
-      email_address: ['', Validators.required, Validators.email],
-      password: ['', Validators.required],
-      confirm_password: ['', Validators.required],
+      user_name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
+      email_address: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(25)]],
+      confirm_password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(25)]],
       auth_type: [AppConstant.AUTH_TYPE_APP]
-    }, {
+    },
+      {
         validator: MustMatch('password', 'confirm_password')
       });
   }
 
-  get f() {
+  get urf() {
     return this.userRegistrationForm.controls;
   }
 
   onRegistrationFormSubmit() {
-    console.log('registration form being submit: start');
-
-    // validations
+    this.userRegistrationFormSubmitted = true;
 
     if (this.userRegistrationForm.invalid) {
       this.formInvalid = true;
@@ -68,11 +69,6 @@ export class UserRegistrationComponent implements OnInit {
     }
 
     console.warn(this.userRegistrationForm.value);
-
-    //   const userRegistration = new UserRegistration(this.userRegistrationForm.get('user_name').value,
-    //   this.userRegistrationForm.get('first_name').value, this.userRegistrationForm.get('last_name').value,
-    //   this.userRegistrationForm.get('email_address').value, this.userRegistrationForm.get('password').value,
-    //   this.userRegistrationForm.get('confirm_password').value);
 
     this.userRegistration = new UserRegistration(this.userRegistrationForm.value);
     this.registrationFailure = false;
@@ -89,7 +85,8 @@ export class UserRegistrationComponent implements OnInit {
         }, 10000);
 
         this.userRegistrationForm.reset();
-
+        this.userRegistrationFormSubmitted = false;
+        this.formInvalid = false;
         // verification mail notification and associated flow
 
       },
@@ -114,7 +111,6 @@ export class UserRegistrationComponent implements OnInit {
           console.log('Error while connecting to the back-end server');
           this.serverSideErrors = 'Error while connecting to the back-end server';
         }
-
 
         this.registrationFailure = true;
 

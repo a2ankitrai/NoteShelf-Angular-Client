@@ -1,3 +1,4 @@
+import * as AppConstant from 'src/app/common/constant/app-constant';
 import { enterAnimation } from './../../animations/animations';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,7 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PolicyComponent implements OnInit {
 
-  constructor() { }
+  appName: string;
+
+  constructor() {
+    this.appName = AppConstant.APP_NAME;
+  }
 
   ngOnInit() {
   }

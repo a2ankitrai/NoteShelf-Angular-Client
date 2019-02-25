@@ -6,7 +6,8 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
-    path: 'profile', component: ProfileComponent, resolve: {
+    path: 'profile', component: ProfileComponent,
+     resolve: {
       profile: ProfileResolverService,
       profilePicture: ProfilePictureResolver
     }

@@ -6,18 +6,22 @@
       <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
         <div class="form-group">
           <label for="userName">User Name</label>
-          <input type="text" class="form-control" id="userName" formControlName="userName" placeholder="Enter username" />
+          <input type="text" class="form-control" id="userName" formControlName="userName" placeholder="Enter username"
+            [ngClass]="{ 'is-invalid': loginFormSubmitted && lf.userName.errors }" />
 
-          <small *ngIf="!loginForm.get('userName').valid && loginForm.get('userName').touched" class="text-muted">
-            UserName is required </small>
+          <div *ngIf="loginFormSubmitted && lf.userName.errors" class="invalid-feedback">
+            <div *ngIf="lf.userName.errors.required">Please enter user name.</div>
+          </div>
 
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" />
+          <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password"
+            [ngClass]="{ 'is-invalid': loginFormSubmitted && lf.password.errors }" />
+          <div *ngIf="loginFormSubmitted && lf.password.errors" class="invalid-feedback">
+            <div *ngIf="lf.password.errors.required">Please enter password.</div>
+          </div>
 
-          <small *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="text-muted">
-            Password is required </small>
         </div>
 
         <div class="form-group">
@@ -34,11 +38,15 @@
         </div>
       </form>
 
-
       <br />
-      <div *ngIf="formInvalid" class="alert alert-danger" role="alert">
+      <!-- <div *ngIf="formInvalid" class="alert alert-danger" role="alert">
         {{errorMessage}}
+      </div> -->
+
+      <div>
+        <ngb-alert *ngIf="alertMessage" [type]="alertType" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
       </div>
+
     </div>
 
     <div class="col-sm-4 col-md-4 col-lg-4">

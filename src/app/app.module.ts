@@ -25,6 +25,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // import { NavbarModule, WavesModule } from 'angular-bootstrap-md';
 import { IntroComponent } from './common/component/intro/intro.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

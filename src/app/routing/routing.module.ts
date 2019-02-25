@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from 'src/app/common/component/page-not-found/p
 import { ProfileRoutingModule } from 'src/app/profile/profile-routing.module';
 import { PlaygroundComponent } from '../common/component/playground/playground.component';
 import { IntroComponent } from '../common/component/intro/intro.component';
+import { PolicyComponent } from '../common/component/policy/policy.component';
 
 const appRoutes: Routes = [
 
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
   { path: 'social-login', component: SocialLoginComponent },
   { path: 'playground', component: PlaygroundComponent },
   { path: 'about', component: AboutComponent },
+  {path: 'privacy-policy', component: PolicyComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -9,6 +9,7 @@ import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userLoggedIn: boolean;
   loggedInUser: LoggedInUser;
   sideClass: string;
+  appName: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -30,8 +32,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private localStorageService: LocalStorageService,
     private cookieService: CookieService,
-    private notesService: NotesService) {
+    private notesService: NotesService,
+  ) {
 
+    this.appName = AppConstant.APP_NAME;
     commonService.userLoggedInObservable.subscribe((val: boolean) => {
       this.userLoggedIn = val;
       this.userLoggedIn === true ? this.loggedInUser = this.commonService.getUser() : this.loggedInUser = undefined;

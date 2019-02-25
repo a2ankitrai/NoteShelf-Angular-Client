@@ -2,6 +2,7 @@
 import { environment } from 'src/environments/environment';
 
 export const NS_ENDPOINT = environment.APIEndpoint;
+export const APP_NAME = environment.appName;
 
 /**
  * Request Constants

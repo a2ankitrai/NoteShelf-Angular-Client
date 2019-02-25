@@ -24,12 +24,14 @@ export class ForgotPasswordComponent implements OnInit {
   alertType: string;
   alertMessage: string;
 
+  forgotPasswordFormSubmitted = false;
+
   constructor(private formBuilder: FormBuilder, private userService: UserService, private commonService: NsCommonService) { }
 
   ngOnInit() {
 
     this.forgotPasswordForm = this.formBuilder.group({
-      userEmail: ['', [Validators.required, Validators.minLength(3)]]
+      userEmail: ['', [Validators.required, Validators.email]]
     });
 
     this.alertType = 'success';
@@ -39,8 +41,14 @@ export class ForgotPasswordComponent implements OnInit {
 
   }
 
+  get fpf() {
+    return this.forgotPasswordForm.controls;
+  }
+
   onForgotPasswordFormSubmit() {
-    console.log('submitting forgot password form ');
+
+    this.forgotPasswordFormSubmitted = true;
+
     if (this.forgotPasswordForm.invalid) {
       this.formInvalid = true;
       return;

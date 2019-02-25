@@ -4,14 +4,19 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Note } from '../model/note.model';
 import { ActivatedRoute } from '@angular/router';
+import { enterAnimation } from 'src/app/common/animations/animations';
 
 @Component({
   selector: 'app-notes-edit',
   templateUrl: './notes-edit.component.html',
-  styleUrls: ['./notes-edit.component.css']
+  styleUrls: ['./notes-edit.component.css'],
+  animations: [
+    enterAnimation
+  ]
 })
 export class NotesEditComponent implements OnInit {
 
+  enterAnimation: any;
   noteForm: FormGroup;
   // @Input() note: Note;
   note: Note;

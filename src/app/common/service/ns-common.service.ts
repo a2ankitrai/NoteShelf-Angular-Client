@@ -46,10 +46,25 @@ export class NsCommonService {
     return this.jwtToken;
   }
 
+  // setCommonHeaders() {
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Content-Type', 'application/json');
+  //   headers = headers.set(AppConstant.X_AUTH_TOKEN, this.getSessionToken());
+  //   return headers;
+  // }
+
   setCommonHeaders() {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set(AppConstant.X_AUTH_TOKEN, this.getSessionToken());
+
+    if (this.getSessionToken() !== null && this.getSessionToken() !== undefined) {
+      headers = headers.set(AppConstant.X_AUTH_TOKEN, this.getSessionToken());
+    }
+
+    if (this.jwtToken !== null && this.jwtToken !== undefined) {
+      headers = headers.set(AppConstant.AUTHORIZATION, AppConstant.BEARER_ + this.jwtToken);
+    }
+
     return headers;
   }
 

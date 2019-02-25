@@ -1,3 +1,4 @@
+import * as AppConstant from 'src/app/common/constant/app-constant';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroComponent implements OnInit {
 
-  constructor() { }
+  appName: string;
+
+  constructor() {
+    this.appName = AppConstant.APP_NAME;
+  }
 
   ngOnInit() {
   }
