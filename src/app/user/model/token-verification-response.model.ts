@@ -7,4 +7,8 @@ export class TokenVerificationResponse {
     public errorMessage: string;
     public status: string;
 
+    public constructor(init?: Partial<TokenVerificationResponse>) {
+        Object.assign(this, init);
+    }
+
 }

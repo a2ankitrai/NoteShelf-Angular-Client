@@ -1,0 +1,49 @@
+<div class="container content-margin">
+    <div class="row">
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+          </div> -->
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <h2>Registration Email Verification</h2>
+            <hr><br>
+
+            <ng-container *ngTemplateOutlet="!emailVerificationCompleted ? loadingTemplate : loadedTemplate">
+            </ng-container>
+
+            <ng-template #loadingTemplate>
+                <div id="loader" class="myloader mt-2">
+                    <h3 class="center">Verifying your registration email...</h3>
+                    <div class="center">
+                        <img src="./../../assets/images/loading-image.gif" class="avatar rounded-circle" height="200"
+                            width="200" alt="avatar">
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template #loadedTemplate>
+                <div class="center" *ngIf="accountActivationSuccess === true; else failedAccountActivation">
+                    <img src="./../../assets/images/success-tick.gif">
+                    <p>Email Successfully verified.</p>
+                    <p>Please <a routerLink="/user/sign-in" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">Sign In </a> to access your account.</p>
+                </div>
+
+            </ng-template>
+
+            <ng-template #failedAccountActivation>
+                <div class="center">
+                    <p>Email Verification Failed.</p>
+                    <div>
+                        <ngb-alert *ngIf="alertMessage" [type]="alertType" (close)="alertMessage = null">
+                            {{ alertMessage }}</ngb-alert>
+                    </div>
+
+                </div>
+
+            </ng-template>
+
+
+        </div>
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+          </div> -->
+    </div>
+</div>

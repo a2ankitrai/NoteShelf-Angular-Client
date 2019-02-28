@@ -1,3 +1,4 @@
+import { TokenDto } from './../model/token-dto.model';
 import { NsCommonService } from 'src/app/common/service/ns-common.service';
 import * as AppConstant from 'src/app/common/constant/app-constant';
 import { Injectable } from '@angular/core';
@@ -7,6 +8,7 @@ import { UserLogin } from '../model/userlogin.model';
 import { UserRegistration } from '../model/userRegistration.model';
 import { LoggedInUser } from 'src/app/common/model/logged-in-user.model';
 import { TokenVerificationResponse } from '../model/token-verification-response.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +58,7 @@ export class UserService {
     return this.http.post(AppConstant.NS_ENDPOINT + 'user/logout', null, { headers: headers, 'observe': 'response' });
   }
 
-  socialSignIn(provider) {
+  socialSignIn(provider: string) {
     window.location.href = AppConstant.NS_ENDPOINT + 'oauth2/authorization/' + provider;
   }
 
@@ -79,6 +81,20 @@ export class UserService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post(AppConstant.NS_ENDPOINT + 'user/reset-password', emailPasswordObject,
+      { headers: headers, 'observe': 'response' });
+  }
+
+  verifyRegistrationEmail(tokenValue: string): Observable<TokenVerificationResponse> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    return this.http.post(AppConstant.NS_ENDPOINT + 'user/verify-registration-email', tokenValue,
+      { headers: headers}).pipe(map(data => new TokenVerificationResponse(data)));
+  }
+
+  activateUserAccount(tokenDto: TokenDto) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    return this.http.post(AppConstant.NS_ENDPOINT + 'user/activate-user-account', tokenDto,
       { headers: headers, 'observe': 'response' });
   }
 

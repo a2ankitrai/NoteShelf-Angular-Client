@@ -76,9 +76,12 @@ export class UserComponent implements OnInit {
           });
       }
     } else {
-      if (!this.router.url.includes('reset-password')) {
+      if (!this.redirectionSkipPages()) {
         this.routeToSignInPage();
       }
+      // if (!this.router.url.includes('reset-password')) {
+      //   this.routeToSignInPage();
+      // }
     }
 
   }
@@ -90,6 +93,17 @@ export class UserComponent implements OnInit {
   routeToHomePage() {
     this.router.navigate(['home'], { relativeTo: this.route });
   }
+
+  redirectionSkipPages() {
+    const components = ['reset-password', 'verify-email'];
+
+    for (let i = 0; i < components.length; i++) {
+      if (this.router.url.includes(components[i])) {
+        return true;
+      }
+    }
+  }
+
 
   isValid(sessionToken: string) {
     // add validation logic here (UUID)

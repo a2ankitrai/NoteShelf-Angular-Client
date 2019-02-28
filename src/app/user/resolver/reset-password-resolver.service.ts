@@ -17,6 +17,7 @@ export class ResetPasswordResolverService implements Resolve<any> {
 
     const token = route.paramMap.get('token');
 
+    // this resolver is no longer required as it's functionality is handled in the component.
     // return this.userService.verifyPasswordResetToken(token);
 
 

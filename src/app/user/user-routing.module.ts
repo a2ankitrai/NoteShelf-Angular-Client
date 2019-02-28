@@ -7,6 +7,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { UserHomeComponent } from './user-home/user-home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetPasswordResolverService } from './resolver/reset-password-resolver.service';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { EmailVerificationResolverService } from './resolver/email-verification-resolver.service';
 
 const routes: Routes = [
   {
@@ -14,6 +16,11 @@ const routes: Routes = [
       {
         path: 'reset-password/:token', component: ResetPasswordComponent, resolve: {
           tokenResponse: ResetPasswordResolverService
+        }
+      },
+      {
+        path: 'verify-email/:token', component: EmailVerificationComponent, resolve: {
+          tokenVerificationResponse: EmailVerificationResolverService
         }
       },
       { path: 'sign-in', component: UserSigninComponent, data: { animation: 'LoginPage' } },

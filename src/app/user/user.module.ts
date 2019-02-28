@@ -10,6 +10,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     UserRegistrationComponent,
     UserHomeComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    EmailVerificationComponent
   ]
 })
 export class UserModule { }

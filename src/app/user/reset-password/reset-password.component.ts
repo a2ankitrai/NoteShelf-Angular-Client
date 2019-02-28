@@ -126,7 +126,7 @@ export class ResetPasswordComponent implements OnInit {
 
 
     this.alertSubject.subscribe((message) => this.alertMessage = message);
-    this.alertSubject.pipe(debounceTime(7000)).subscribe(() => this.alertMessage = null);
+    // this.alertSubject.pipe(debounceTime(7000)).subscribe(() => this.alertMessage = null);
 
   }
 
@@ -138,9 +138,7 @@ export class ResetPasswordComponent implements OnInit {
   onResetPasswordFormSubmit() {
 
     this.resetPasswordFormSubmitted = true;
-
     console.log('reset password form submitted: ' + this.resetPasswordFormSubmitted);
-
 
     if (this.resetPasswordForm.invalid) {
       this.formInvalid = true;
@@ -157,10 +155,10 @@ export class ResetPasswordComponent implements OnInit {
           const message = 'Your Password reset request is successful. Redirecting to Sign In...';
           this.alertType = 'success';
           this.alertSubject.next(message);
-
+          this.resetPasswordForm.reset();
           setTimeout(() => {
             this.router.navigate(['/user/sign-in']);
-          }, 5000);
+          }, 2000);
 
         } else {
           const message = 'Some error occurred while resetting the password. Please try again after sometime.';

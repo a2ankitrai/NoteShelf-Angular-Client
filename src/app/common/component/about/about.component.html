@@ -1,10 +1,49 @@
 <!-- [@bounceIn]="bounceIn" [@fadeOutRight]="fadeOutRight" -->
 <div class="container content-margin" [@enterAnimation]="enterAnimation">
   <div class="row">
-    <div class="col-xs-12 col-md-12 col-lg-10">
+    <div class="col-xs-12 col-md-12 col-lg-12">
       <h2>About {{appName}}</h2>
+      <hr>
 
-      <p> {{appName}} is a place to store and manage your notes in best manner.</p>
+      <div class="center">
+        <img src="./../../../../assets/images/logo-banner_1.png" width="100%" alt="NoteShelf Logo">
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+      <div class="content-margin">
+        <p>Hello There! Welcome to NoteShelf.</p>
+
+        <p>{{appName}} is a smart way to create and manage rich text based notes. Create awesome text notes with an
+          inbuilt editor and manage them online in a safe and secured manner. So what are you waiting for ? Get started
+          by creating an account either registering through your email or login via social sign in platforms (Currently
+          Google and Github are supported). </p>
+
+        <p>
+          Once you are done with registration, you can start creating notes after login. Your saved notes will appear on
+          the Notes section from where new notes can be created and existing notes can be updated or deleted.You can
+          also manage your profile by updating your information in the profile section.
+        </p>
+
+        <p>
+          I developed {{appName}} with an intention to build an end to end application integrating various technologies,
+          together which can scale well under load ensuring high availability. There are many components which together
+          power {{appName}} to provide a seamless experience to the user. There is front-end application implemented in
+          Angular 7 which communicates with a back-end service implemented in Java using Spring-Boot Framework. The
+          back-end service communicates with different databases(MongoDB and MySQL) and cache system(Redis) to response
+          to user requests in a stateless way. {{appName}} also relies on <a
+            href="https://github.com/a2ankitrai/Ank-Oauth2-Client">Ank-Oauth2-Client</a> library also developed by me to
+          support sign in from social-login platforms like Google and Github. The front-end application is hosted on
+          firebase platform while the back-end service along with Databases and Cache is hosted on Amazon Web Services.
+        </p>
+
+        <p>If you liked this application or would like to get in touch with me, please visit my website <a
+           target="_blank" href="https://ankitrai.com">ankitrai.com</a> </p>
+      </div>
     </div>
   </div>
 </div>
