@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  // APIEndpoint: 'http://localhost:9000/'
-  APIEndpoint: 'http://localhost:8080/'
+  APIEndpoint: 'https://api.noteshelf.ankitrai.com/',
+  appName: 'NoteShelf'
+
 };
