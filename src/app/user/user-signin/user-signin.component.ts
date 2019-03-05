@@ -109,21 +109,14 @@ export class UserSigninComponent implements OnInit {
       err => {
         console.log(err);
         let errorMessage: string;
-        if (err.status === 401) {
-          // this.formInvalid = true;
-          // this.errorMessage = 'Username and/or password is incorrect. Please enter valid credentials.';
-          errorMessage = 'Username and/or password is incorrect. Please enter valid credentials.';
-        } else if (err.status === 403) {
-          errorMessage = 'Account not yet activated. Please verify your by clicking the link sent to you over mail';
+        if (err.status === 403) {
+          errorMessage = 'Username and/or password is incorrect. Please enter valid credentials.' +
+            ' If you have recently registered please verify your email address';
         } else {
-          errorMessage = 'Unknown Error while connecting to the server. Backend might be down.';
+          errorMessage = 'Unknown Error while connecting to the server. Please retry after sometime.';
         }
-
         this.alertType = AppConstant.DANGER;
         this.alertSubject.next(errorMessage);
-
-        // alert the user about failures..
-        // invald credentials
       }
     );
 

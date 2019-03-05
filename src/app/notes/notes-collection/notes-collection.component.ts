@@ -33,4 +33,8 @@ export class NotesCollectionComponent implements OnInit {
 
   }
 
+  isNotesMapEmpty() {
+    return this.notesMap === undefined || this.notesMap.size === 0;
+  }
+
 }

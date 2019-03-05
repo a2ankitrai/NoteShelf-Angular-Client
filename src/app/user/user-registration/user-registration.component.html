@@ -15,6 +15,7 @@
               <div *ngIf="urf.user_name.errors.required">User name is required.</div>
               <div *ngIf="urf.user_name.errors.minlength">User Name must be at least 4 characters</div>
               <div *ngIf="urf.user_name.errors.maxlength">User Name can must be at max 20 characters</div>
+              <div *ngIf="urf.user_name.errors.alphaNumeric">Only AlphaNumeric characters are allowed</div>
               <!-- add validation for restrricting special characters users -->
             </div>
 
@@ -28,7 +29,8 @@
         <div class="form-group row">
           <label for="email_address" class="col-sm-2 col-md-4 col-form-label">Email Address</label>
           <div class="col-sm-10 col-md-8">
-            <input type="text" class="form-control" id="email_address" formControlName="email_address" placeholder="Email Address"
+            <input type="text" class="form-control" id="email_address" formControlName="email_address"
+              placeholder="Email Address"
               [ngClass]="{ 'is-invalid': userRegistrationFormSubmitted && urf.email_address.errors }">
             <div *ngIf="userRegistrationFormSubmitted && urf.email_address.errors" class="invalid-feedback">
               <div *ngIf="urf.email_address.errors.required">Email Address is required.</div>
@@ -57,20 +59,17 @@
           <label for="confirm_password" class="col-sm-2 col-md-4 col-form-label">Confirm Password</label>
           <div class="col-sm-10 col-md-8">
             <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password"
-              placeholder="Confirm Password" [ngClass]="{ 'is-invalid': userRegistrationFormSubmitted && urf.confirm_password.errors }">
+              placeholder="Confirm Password"
+              [ngClass]="{ 'is-invalid': userRegistrationFormSubmitted && urf.confirm_password.errors }">
             <div *ngIf="userRegistrationFormSubmitted && urf.confirm_password.errors" class="invalid-feedback">
               <div *ngIf="urf.confirm_password.errors.required">Confirm Password is required.</div>
-              <!-- Î<div *ngIf="prf.confirm_password.errors.minlength">Password must be at least 4 character</div>
-              <div *ngIf="prf.confirm_password.errors.maxlength">Password can be at max 25 characters</div> -->
               <div *ngIf="urf.confirm_password.errors.mustMatch">Passwords do not match.</div>
-              <!-- password match validation not working.. -->
             </div>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-10 col-md-8">
-            <!--  [disabled]="!userRegistrationForm.valid" -->
             <button type="submit" class="btn btn-success btn-round text-capitalize">
               Sign Up
             </button>
@@ -94,23 +93,22 @@
 
       <div *ngIf="registrationSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        Registration succesful. Please login with your credentials.
+        Registration succesful. Please verify your account by clicking on the activation link sent to your email
+        address.
       </div>
 
       <div *ngIf="registrationFailure" class="alert alert-danger fade show" role="alert">
         <div *ngIf="serverValidationErrors !== undefined">
-          Please correct below fields:
+          Registration failed due to below validation failures:
           <ul>
             <div *ngFor="let item of serverValidationErrors | keyvalue">
-              <b>{{item.key}}</b> - {{item.value}}
+              <b>{{item.key | titleCaser}}</b> - {{item.value}}
             </div>
           </ul>
         </div>
 
         <div *ngIf="serverSideErrors !== undefined">
-          Error occured during Registration
-          <br>
-          <b>{{serverSideErrors}}</b>
+          Some error occured during user registration. Please retry after some time.
         </div>
       </div>
 

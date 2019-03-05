@@ -36,16 +36,6 @@
           </p>
         </div>
       </form>
-
-      <br />
-      <!-- <div *ngIf="formInvalid" class="alert alert-danger" role="alert">
-        {{errorMessage}}
-      </div> -->
-
-      <div>
-        <ngb-alert *ngIf="alertMessage" [type]="alertType" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
-      </div>
-
     </div>
 
     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -61,8 +51,10 @@
           <span class="fa fa-github"></span>GitHub
         </a>
       </div>
-      <hr>
-      <!-- <div>
+
+      <!-- 
+        <hr>
+        <div>
         <a class="btn btn-block btn-social btn-twitter" style="color: white">
           <span class="fa fa-twitter"></span>Twitter
         </a>
@@ -74,5 +66,13 @@
 
     </div>
 
+  </div>
+
+  <div class="row">
+    <div class="col-sm-10 col-md-10 col-lg-10">
+      <div>
+        <ngb-alert *ngIf="alertMessage" [type]="alertType" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
+      </div>
+    </div>
   </div>
 </div>

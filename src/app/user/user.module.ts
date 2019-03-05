@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { TitleCaserPipe } from '../common/pipe/title-caser.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
     UserHomeComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    TitleCaserPipe
   ]
 })
 export class UserModule { }

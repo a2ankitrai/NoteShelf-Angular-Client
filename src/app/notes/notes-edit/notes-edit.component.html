@@ -1,15 +1,32 @@
 <div class="container content-margin" [@enterAnimation]="enterAnimation">
 
-  <h2>{{pageHeader}}</h2>
+  <h2>{{pageHeader}}
+    <a class="btn btn-info btn-round text-capitalize float-right" role="button" [routerLink]="['/notes']">
+      <i class="fa fa-caret-left fa-lg mr-2" aria-hidden="true"></i>
+      Back to Notes Collection
+    </a>
+  </h2>
+  <br>
+  <!--
+  <hr> -->
 
   <form [formGroup]="noteForm" (ngSubmit)="onNoteFormSubmit()">
     <div class="form-group">
       <label for="note_title">Note Title</label>
-      <input type="text" class="form-control" id="note_title" formControlName="note_title" aria-describedby="note_title_help"
-        placeholder="Your Note Title">
-      <small id="note_title_help" class="form-text text-muted">Give a small title to your note</small>
-      <small *ngIf="!noteForm.get('note_title').valid && noteForm.get('note_title').touched" class="text-muted">
-        Note Title is required. Minimum length : 3 characters </small>
+
+      <input type="text" class="form-control" id="note_title" formControlName="note_title"
+        aria-describedby="note_title_help" placeholder="Note Title"
+        [ngClass]="{ 'is-invalid': noteFormSubmitted && nf.note_title.errors }">
+
+      <div *ngIf="noteFormSubmitted && nf.note_title.errors" class="invalid-feedback">
+        <div *ngIf="nf.note_title.errors.required">Note Title is required</div>
+        <div *ngIf="nf.note_title.errors.minlength">Note Title must be at least 3 characters</div>
+        <div *ngIf="nf.note_title.errors.maxlength">Note Title can be at max 25 characters</div>
+      </div>
+
+      <!-- <small id="note_title_help" class="form-text text-muted">Give a small title to your note</small> -->
+      <!-- <small *ngIf="!noteForm.get('note_title').valid && noteForm.get('note_title').touched" class="text-muted">
+        Note Title is required. Minimum length : 3 characters </small> -->
     </div>
 
     <!-- <div class="form-group">
@@ -24,13 +41,21 @@
       <!-- <quill-editor [(ngModel)]="editorText" [modules]="toolBar" [style]="{height: '250px'}" [placeholder]="placeholderText"
         [required]="true" sanitize="true"></quill-editor>  [style]="style" -->
 
-        <quill-editor formControlName="note_content" [modules]="toolBar"  [style]="style" [placeholder]="placeholderText"
-        [required]="true" sanitize="true" bounds= "document.body"></quill-editor>
+      <div [ngClass]="{ 'is-invalid': noteFormSubmitted && nf.note_content.errors }">
+        <quill-editor formControlName="note_content" [modules]="toolBar" [style]="style" [placeholder]="placeholderText"
+          [required]="true" sanitize="true" bounds="document.body"></quill-editor>
+      </div>
 
+      <!-- complete below validatiions-->
+
+      <div *ngIf="noteFormSubmitted && nf.note_content.errors" class="invalid-feedback">
+        <div *ngIf="nf.note_content.errors.required">Note Content is required</div>
+        <div *ngIf="nf.note_content.errors.minlength">Note Title must be at least 5 characters</div>
+      </div>
 
       <!-- <textarea class="form-control" id="note_content" formControlName="note_content" rows="10" placeholder="Your Note Content"></textarea> -->
-      <small *ngIf="!noteForm.get('note_content').valid && noteForm.get('note_content').touched" class="text-muted">
-        Note Content is required. Minimum length : 5 characters </small>
+      <span *ngIf="!nf.note_content.valid && noteFormSubmitted" class="invalid">
+        Note Content is required. Minimum length : 5 characters </span>
     </div>
 
     <button type="submit" class="btn btn-primary">{{saveUpdateLabel}}</button>
@@ -39,5 +64,11 @@
 
       Replicate the server validation failures scenarios same way as of user registration
     -->
+    <br>
+
+    <div>
+      <ngb-alert *ngIf="alertMessage" [type]="alertType" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
+    </div>
+
   </form>
 </div>

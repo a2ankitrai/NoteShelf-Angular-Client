@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private commonService: NsCommonService,
     private route: ActivatedRoute) {
+
     this.route.data.subscribe(response => {
       this.profile = response.profile.body as Profile;
 
@@ -77,6 +78,8 @@ export class ProfileComponent implements OnInit {
       if (this.profileImageBlob) {
         console.log('blob exists');
         reader.readAsDataURL(this.profileImageBlob);
+      } else if (this.commonService.getUser().profilePicture !== null) {
+        this.imgURL = this.commonService.getUser().profilePicture;
       } else {
         this.imgURL = './assets/images/default_profile_picture.png';
       }
@@ -126,7 +129,7 @@ export class ProfileComponent implements OnInit {
     this.user = this.commonService.getUser();
 
     this.alertSubject.subscribe((message) => this.alertMessage = message);
-    this.alertSubject.pipe(debounceTime(7000)).subscribe(() => this.alertMessage = null);
+    this.alertSubject.pipe(debounceTime(AppConstant.ALERT_CLOSE_TIME)).subscribe(() => this.alertMessage = null);
 
   }
 

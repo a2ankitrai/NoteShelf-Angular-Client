@@ -3,11 +3,15 @@ import * as AppConstant from 'src/app/common/constant/app-constant';
 import { NsCommonService } from '../../service/ns-common.service';
 import { Router } from '@angular/router';
 import { LoggedInUser } from '../../model/logged-in-user.model';
+import { enterAnimation } from '../../animations/animations';
 
 @Component({
   selector: 'app-page-not-found',
   templateUrl: './page-not-found.component.html',
-  styleUrls: ['./page-not-found.component.css']
+  styleUrls: ['./page-not-found.component.css'],
+  animations: [
+    enterAnimation
+  ]
 })
 export class PageNotFoundComponent implements OnInit {
 

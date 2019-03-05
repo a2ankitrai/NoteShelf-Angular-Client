@@ -25,5 +25,26 @@ export const AUTH_TYPE_APP = 'APP';
 export const SUCCESS = 'success';
 export const DANGER = 'danger';
 
+export const ALERT_CLOSE_TIME = 5000;
+
+// ------------- Notes Constant : start
+
+export const PAGE_HEADER_ADD_NEW_NOTE = 'Create New Note';
+export const PAGE_HEADER_EDIT_NOTE = 'Edit Note';
+
+export const NOTES_SAVE_BUTTON = 'Save';
+export const NOTES_UPDATE_BUTTON = 'Update';
+
+export const NOTE_SAVE_SUCCESS_MESSAGE = 'Note saved successfully.';
+export const NOTE_SAVE_FAILURE_MESSAGE = 'Oops! Some Error occured while saving the note. Please retry after sometime.';
+
+export const NOTE_UPDATE_SUCCESS_MESSAGE = 'Note updated successfully.';
+export const NOTE_UPDATE_FAILURE_MESSAGE = 'Oops! Some Error occured while updating the note. Please retry after sometime.';
+
+
+
+
+
+
 
 

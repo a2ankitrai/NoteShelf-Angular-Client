@@ -25,9 +25,9 @@
       Delete</button>
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{note.note_title}}</h5>
+    <h5 class="card-title">{{note.note_title | trimHtml : '20'}}</h5>
     <!-- <div [innerHTML]="note.note_content"></div> -->
-    <div class="card-text" [innerHTML]="note.note_content | trimHtml"></div>
+    <div class="card-text" [innerHTML]="note.note_content | trimHtml : '100'"></div>
     <div class="card-footer bg-transparent">
       <small class="text-muted">Last updated: {{note.updated_date | date : 'medium'}}</small>
 

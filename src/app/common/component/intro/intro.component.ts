@@ -1,12 +1,14 @@
 import * as AppConstant from 'src/app/common/constant/app-constant';
 import { Component, OnInit } from '@angular/core';
+import { zoomInAnimation } from '../../animations/animations';
 
 @Component({
   selector: 'app-intro',
-  // templateUrl: './intro.component.html',
-  // styleUrls: ['./intro.component.css']
   templateUrl: './intro.component2.html',
-  styleUrls: ['./intro.component2.css']
+  styleUrls: ['./intro.component2.css'],
+  animations: [
+    zoomInAnimation
+  ]
 })
 export class IntroComponent implements OnInit {
 

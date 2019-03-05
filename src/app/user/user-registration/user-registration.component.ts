@@ -3,9 +3,9 @@ import { UserService } from '../service/user.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserRegistration } from '../model/userRegistration.model';
-import { NsCommonService } from '../../common/service/ns-common.service';
 import * as AppConstant from 'src/app/common/constant/app-constant';
 import { MustMatch } from 'src/app/common/validators/must-match.validator';
+import { AlphaNumericValidator } from 'src/app/common/validators/alpha-numeric.validator';
 
 @Component({
   selector: 'app-user-registration',
@@ -29,7 +29,7 @@ export class UserRegistrationComponent implements OnInit {
 
   userRegistrationFormSubmitted = false;
 
-  constructor(private userService: UserService, private commonService: NsCommonService, private formBuilder: FormBuilder) { }
+  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
 
@@ -43,10 +43,10 @@ export class UserRegistrationComponent implements OnInit {
     // });
 
     this.userRegistrationForm = this.formBuilder.group({
-      user_name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
+      user_name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]], // AlphaNumericValidator
       email_address: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(25)]],
-      confirm_password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(25)]],
+      confirm_password: ['', [Validators.required]],
       auth_type: [AppConstant.AUTH_TYPE_APP]
     },
       {
@@ -102,7 +102,6 @@ export class UserRegistrationComponent implements OnInit {
           console.log(errors.exceptionMessage);
           this.serverSideErrors = errors.exceptionMessage;
         } else if (err.status === 400 && err.error.validationErrors) {
-
           console.log('Validation errors found');
           this.serverValidationErrors = new Array();
           this.serverValidationErrors = err.error.validationErrors;
@@ -116,8 +115,6 @@ export class UserRegistrationComponent implements OnInit {
 
       }
     );
-
-    console.log('registrarion form being sumit: end');
   }
 
 }

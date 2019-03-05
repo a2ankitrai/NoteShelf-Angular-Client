@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class QuillEditorService {
 
-  placeholderText = 'Create an Awesome Note..';
+  placeholderText = 'Create, Manage, Inspire..';
   style = {
     'min-height': '250px',
     'display': 'block',

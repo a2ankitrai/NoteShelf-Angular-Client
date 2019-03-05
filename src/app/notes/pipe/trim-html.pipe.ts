@@ -5,11 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TrimHtmlPipe implements PipeTransform {
 
-  transform(value: string, args?: any): string {
+  transform(value: string, args: string): string {
 
     let trimmedContent: string;
+    const contentLimit = parseInt(args, 10);
 
-    trimmedContent = this.trimHtml(value, { limit: 50 }).html;
+    trimmedContent = this.trimHtml(value, { limit: contentLimit }).html;
     return trimmedContent;
   }
 

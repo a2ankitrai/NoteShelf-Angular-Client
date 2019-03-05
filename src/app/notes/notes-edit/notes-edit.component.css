@@ -6,3 +6,8 @@ input.ng-invalid.ng-touched {
 textarea.ng-invalid.ng-touched {
     border: 1px solid red;
   }  
+
+.invalid {
+  color: red;
+  font-size: 5;
+}
