@@ -6,7 +6,7 @@
       <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
         <div class="form-group">
           <label for="userName">User Name</label>
-          <input type="text" class="form-control" id="userName" formControlName="userName" placeholder="Enter username"
+          <input type="text" class="form-control" id="userName" formControlName="userName" placeholder="User Name"
             [ngClass]="{ 'is-invalid': loginFormSubmitted && lf.userName.errors }" />
 
           <div *ngIf="loginFormSubmitted && lf.userName.errors" class="invalid-feedback">

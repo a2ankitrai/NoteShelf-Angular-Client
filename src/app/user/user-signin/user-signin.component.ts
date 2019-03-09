@@ -40,8 +40,7 @@ export class UserSigninComponent implements OnInit {
 
     this.loginForm = new FormGroup({
       'userName': new FormControl(null, [Validators.required]),
-      // hardcoded password. added for faster develop. remove this later.
-      'password': new FormControl('password', [Validators.required])
+      'password': new FormControl(null, [Validators.required])
     });
 
     this.formInvalid = false;
