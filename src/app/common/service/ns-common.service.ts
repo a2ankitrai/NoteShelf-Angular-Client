@@ -110,4 +110,12 @@ export class NsCommonService {
     return this.http.get(AppConstant.NS_ENDPOINT + 'user/detail', { headers: headers, 'observe': 'response' });
   }
 
+  isNotNullOrUndefined(obj: object) {
+    if (obj === null || obj === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 }

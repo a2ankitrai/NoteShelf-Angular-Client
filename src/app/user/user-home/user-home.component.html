@@ -1,22 +1,81 @@
-<div class="container content-margin"  @enterAnimation>
-  <div class="row">
-    <div class="col-xs-12 col-md-12 col-lg-10">
+<!-- https://mdbootstrap.com/docs/angular/sections/projects/ -->
+<div class="container" @enterAnimation>
+  <!--Projects section v.2-->
+  <section class="section text-center">
 
-      <!-- <p> Welcome user <b>{{user.userName}}</b></p> -->
+    <!--Section heading-->
+    <h2 class="font-weight-bold h1 py-5 pb-md-2">
+      <strong>Welcome {{userName}} </strong>
+    </h2>
+    <!--Section description-->
+    <p class="grey-text pb-5 text-center mx-xl-5 px-xl-5">Please choose any of the below options.</p>
 
-      <!-- <p>Email: <b>{{user.email}}</b></p> -->
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center">
 
+      <!--Grid column-->
+      <div class="col-lg-6 col-xl-5 mb-3">
 
-      <!-- check how binded data can be parsed into html -->
+        <!--Featured image-->
+        <div class="view overlay rounded z-depth-2  waves-light" mdbWavesEffect>
+          <img src="../../../assets/images/notes-card.jpeg" class="img-fluid" alt="Sample project image">
+          <a routerLink="/notes" routerLinkActive="active">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
 
-      <!-- {{responseMessage}} -->
+        <!--Excerpt-->
+        <mdb-card-body>
+          <a routerLink="/notes" routerLinkActive="active" class="blue-text">
+            <h5 class="font-weight-bold mt-2">
+              <mdb-icon fas icon="sticky-note"></mdb-icon>
+              Notes
+            </h5>
+            <!--  <i class="fa fa-edit fa-lg mr-2" aria-hidden="true"></i> 
+              <mdb-icon fas icon="camera-retro" size="2x"></mdb-icon>-->
+          </a>
+          <p>Manage your Notes</p>
+          <!-- <h4 class="font-weight-bold mt-2 mb-3">This is title of the news</h4>
+          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+            quia non
+            numquam.
+          </p>
+          <a mdbBtn color="success" size="md" rounded="true" class="waves-light" mdbWavesEffect> View more</a> -->
+        </mdb-card-body>
 
-      <h3>Please choose any of the below options</h3>
+      </div>
+      <!--Grid column-->
 
-      <a routerLink="/notes" routerLinkActive="active">Go to Notes</a>
-      <br>
-      <a routerLink="/profile" routerLinkActive="active">Go to Profile</a>
+      <!--Grid column-->
+      <div class="col-lg-6 col-xl-5 mb-3">
+
+        <!--Featured image-->
+        <div class="view overlay rounded z-depth-2  waves-light" mdbWavesEffect>
+          <img src="../../../assets/images/blur-dots.jpeg" class="img-fluid" alt="Sample project image">
+          <a routerLink="/profile" routerLinkActive="active">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+        <!--Excerpt-->
+        <mdb-card-body>
+          <a routerLink="/profile" routerLinkActive="active" class="green-text">
+            <h5 class="font-weight-bold mt-2">
+              <i class="fa fa-user"></i> Profile</h5>
+          </a>
+          <p>Manage your Profile</p>
+          <!-- <h4 class="font-weight-bold mt-2 mb-3">This is title of the news</h4>
+          <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut
+            aliquid.</p>
+          <a mdbBtn color="success" size="md" rounded="true" class="waves-light" mdbWavesEffect> View more</a> -->
+        </mdb-card-body>
+
+      </div>
+      <!--Grid column-->
 
     </div>
-  </div>
+    <!--Grid row-->
+
+  </section>
+  <!--/Projects section v.2-->
 </div>

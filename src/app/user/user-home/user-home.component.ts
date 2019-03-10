@@ -1,3 +1,4 @@
+import * as AppConstant from 'src/app/common/constant/app-constant';
 import { enterAnimation } from './../../common/animations/animations';
 import { LoggedInUser } from './../../common/model/logged-in-user.model';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NsCommonService } from 'src/app/common/service/ns-common.service';
 import { HttpParams } from '@angular/common/http';
 import { UserService } from '../service/user.service';
+import { useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-user-home',
@@ -16,14 +18,26 @@ import { UserService } from '../service/user.service';
 })
 export class UserHomeComponent implements OnInit {
 
-  // username: string;
-  // responseMessage: any;
   user: LoggedInUser;
-  // jwtToken: string;
+  userName: string;
 
-  constructor(private route: ActivatedRoute, private commonService: NsCommonService, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private commonService: NsCommonService, private userService: UserService) {
+  }
 
   ngOnInit() {
+
+    this.user = this.commonService.getUser();
+    if (this.user.authType === AppConstant.AUTH_TYPE_APP) {
+      this.userName = this.user.userName;
+    } else {
+      if (this.user.name !== null) {
+        this.userName = this.user.name;
+      } else {
+        this.userName = this.user.firstName + ' ' + this.user.lastName;
+      }
+
+
+    }
   }
 
   getParamValueQueryString(paramName) {

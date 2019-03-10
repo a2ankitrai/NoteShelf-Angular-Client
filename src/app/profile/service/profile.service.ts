@@ -31,13 +31,6 @@ export class ProfileService {
     return this.http.put(AppConstant.NS_ENDPOINT + 'profile', profile, { headers: headers, 'observe': 'response' });
   }
 
-  accessAuthencatedEndpointWithToken(token: string) {
-    let headers = new HttpHeaders();
-    headers = headers.set('X-Auth-Token', token);
-
-    return this.http.post('http://localhost:9000/user/logout', null, { headers: headers });
-  }
-
   updateProfilePicture(imageFile: any) {
 
     let headers = new HttpHeaders();

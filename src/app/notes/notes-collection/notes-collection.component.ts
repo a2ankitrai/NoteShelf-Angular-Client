@@ -3,14 +3,15 @@ import { Note } from './../model/note.model';
 import { NotesService } from './../service/notes.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { zoomInAnimation } from 'src/app/common/animations/animations';
+import { zoomInAnimation, enterAnimation } from 'src/app/common/animations/animations';
 
 @Component({
   selector: 'app-notes-collection',
   templateUrl: './notes-collection.component.html',
   styleUrls: ['./notes-collection.component.css'],
   animations: [
-    zoomInAnimation
+    zoomInAnimation,
+    enterAnimation
   ]
 })
 export class NotesCollectionComponent implements OnInit {
@@ -20,6 +21,7 @@ export class NotesCollectionComponent implements OnInit {
   }
 
   zoomInAnimation: any;
+  enterAnimation: any;
   notesMap: Map<string, Note>;
 
   ngOnInit() {

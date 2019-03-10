@@ -1,3 +1,4 @@
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +20,8 @@ import { TitleCaserPipe } from '../common/pipe/title-caser.pipe';
     ReactiveFormsModule,
     CommonModule,
     UserRoutingModule,
-    NgbAlertModule
+    NgbAlertModule,
+    MDBBootstrapModule
   ],
   declarations: [
     UserComponent,

@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ResetPasswordResolverService } from './resolver/reset-password-resolver.service';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { EmailVerificationResolverService } from './resolver/email-verification-resolver.service';
+import { AuthenticationGuard } from '../common/guard/authentication.guard';
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
       },
       { path: 'sign-in', component: UserSigninComponent, data: { animation: 'LoginPage' } },
       { path: 'sign-up', component: UserRegistrationComponent },
-      { path: 'home', component: UserHomeComponent, data: { animation: 'HomePage' } },
+      { path: 'home', component: UserHomeComponent, data: { animation: 'HomePage' }, canActivate: [AuthenticationGuard], },
       { path: 'forgot-password', component: ForgotPasswordComponent }
 
     ]
