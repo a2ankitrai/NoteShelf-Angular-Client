@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<div *ngIf="isNotesMapEmpty()">
+<div *ngIf="isNotesMapEmpty()" [@enterAnimation]="enterAnimation">
 
   <div class="jumbotron">
     <h1 class="display-4">It's empty here!!</h1>

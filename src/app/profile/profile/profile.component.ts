@@ -78,7 +78,8 @@ export class ProfileComponent implements OnInit {
       if (this.profileImageBlob) {
         console.log('blob exists');
         reader.readAsDataURL(this.profileImageBlob);
-      } else if (this.commonService.getUser().profilePicture !== null) {
+      } else if (this.isNotNullOrUndefined(this.commonService.getUser()) &&
+        this.isNotNullOrUndefined(this.commonService.getUser().profilePicture)) {
         this.imgURL = this.commonService.getUser().profilePicture;
       } else {
         this.imgURL = './assets/images/default_profile_picture.png';
@@ -230,6 +231,14 @@ export class ProfileComponent implements OnInit {
 
       });
 
+  }
+
+  isNotNullOrUndefined(obj: any) {
+    if (obj === null || obj === undefined) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   // resetResponseAlert() {
