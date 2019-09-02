@@ -102,7 +102,7 @@ export class UserRegistrationComponent implements OnInit {
           console.log(errors.exceptionMessage);
           this.serverSideErrors = errors.exceptionMessage;
         } else if (err.status === 400 && err.error.validationErrors) {
-          console.log('Validation errors found');
+          console.log('Validation errors found');``
           this.serverValidationErrors = new Array();
           this.serverValidationErrors = err.error.validationErrors;
         } else {
